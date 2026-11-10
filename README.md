@@ -66,3 +66,8 @@ React + TypeScript + Vite · Tailwind CSS · KaTeX · SVG · PWA · Capacitor (A
 ## Penyusun
 
 Ziana Alfia Zahra — S1 Pendidikan Matematika, Kelas 3A, NIM 2225250076
+
+## Lisensi
+
+© 2026 Ziana Alfia Zahra. Dirilis dengan [Lisensi MIT](LICENSE): boleh digunakan, diubah,
+dan dibagikan, **dengan tetap mencantumkan nama penyusun**.

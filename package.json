@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "description": "Aplikasi pembelajaran Panjang Busur dan Luas Juring untuk siswa SMP berbasis Teori Beban Kognitif.",
   "author": "Ziana Alfia Zahra",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
