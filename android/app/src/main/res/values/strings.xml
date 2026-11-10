@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">LingkarKu</string>
+    <string name="title_activity_main">LingkarKu</string>
+    <string name="package_name">id.lingkarku.app</string>
+    <string name="custom_url_scheme">id.lingkarku.app</string>
+</resources>

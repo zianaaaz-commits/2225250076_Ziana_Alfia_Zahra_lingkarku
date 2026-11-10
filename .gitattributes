@@ -1,0 +1,9 @@
+# Akhir baris konsisten (LF) di repositori, apa pun sistem operasinya.
+* text=auto eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Berkas biner
+*.png binary
+*.jpg binary
+*.jar binary

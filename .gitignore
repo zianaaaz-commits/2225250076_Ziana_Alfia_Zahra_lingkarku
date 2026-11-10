@@ -1,0 +1,19 @@
+# Dependensi & hasil build (bisa dibuat ulang dengan npm install / npm run build)
+node_modules/
+dist/
+dev-dist/
+coverage/
+.vite/
+
+# Android: hasil build & salinan web (dibuat ulang oleh `npm run android`)
+android/app/build/
+android/build/
+android/.gradle/
+android/app/src/main/assets/public/
+android/local.properties
+
+# Lain-lain
+*.log
+.DS_Store
+Thumbs.db
+.idea/

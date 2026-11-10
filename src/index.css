@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+/* Kode warna konsisten (lihat CLAUDE.md §5 dan docs/06-desain-ui-ux.md) */
+@theme {
+  --color-busur: #f97316;
+  --color-juring: #38bdf8;
+  --color-jari: #16a34a;
+  --color-sudut: #9333ea;
+  --color-teks: #1f2937;
+  --color-aksi: #2563eb;
+  --color-benar: #15803d;
+  --color-salah: #dc2626;
+  --font-sans: 'Nunito', 'Poppins', system-ui, sans-serif;
+}
+
+html,
+body {
+  background: #ffffff;
+  color: var(--color-teks);
+  font-size: 17px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
