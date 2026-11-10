@@ -53,6 +53,16 @@ Durasi di bawah adalah perkiraan; sesuaikan dengan jadwal kuliah.
 - [ ] Build APK debug — perlu Android Studio + JDK 21 (belum terpasang di laptop ini)
 - [ ] Uji di minimal 1 ponsel Android nyata
 
+### Sprint 5 — Literasi, Python, Distribusi (10 November 2026)
+- [x] Modul **Misi Literasi** (4 misi, 5 tahap PISA/AKM) — [09-literasi-matematika.md](09-literasi-matematika.md)
+- [x] Alat Python: lagu latar, pemeriksa kunci, analisis penelitian, QR, kunci APK + unit test
+- [x] Lagu latar hanya di layar menu (tombol 🔊/🔇, berhenti saat aplikasi diminimalkan)
+- [x] Ponsel: tombol *back* Android, safe-area, tanpa geser samping, header ringkas di 360 px
+- [x] Halaman **Pasang Aplikasi** (PWA 1-ketuk, panduan iPhone/laptop, unduh APK, QR)
+- [x] GitHub Actions: uji + GitHub Pages (`web.yml`), APK ke Releases (`apk.yml`)
+- [ ] Simpan kunci APK ke GitHub Secrets (oleh pemilik repo)
+- [ ] Uji APK di HP Android nyata
+
 ## Tahap I — Implementation (± 2 minggu)
 - [ ] Validasi ahli materi & ahli media → revisi
 - [ ] Uji coba perorangan (1–3 siswa) → revisi

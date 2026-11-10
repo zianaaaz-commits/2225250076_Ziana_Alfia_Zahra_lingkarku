@@ -1,0 +1,2 @@
+# Hanya buat_qr.py yang memerlukan paket tambahan; skrip lain memakai pustaka standar.
+qrcode==8.2

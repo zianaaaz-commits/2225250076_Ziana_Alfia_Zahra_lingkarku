@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { CERITA } from '../content/cerita';
 import { CONTOH } from '../content/contoh';
+import { LITERASI } from '../content/literasi';
 import {
   bacaProgres,
   denganSelesai,
@@ -64,6 +65,8 @@ export function modulSelesai(p: Progres, id: string): boolean {
       return (['1', '2', '3'] as const).every((l) => lulusLevel(p, l));
     case 'cerita':
       return CERITA.every((c) => p.selesai.includes(`cerita:${c.id}`));
+    case 'literasi':
+      return LITERASI.every((m) => p.selesai.includes(`literasi:${m.id}`));
     default:
       return p.selesai.includes(id);
   }

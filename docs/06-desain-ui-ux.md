@@ -169,9 +169,14 @@ Beranda
 
 ## 5. Interaksi & Animasi
 
+- **Lagu latar (keputusan 10 November 2026):** lagu orisinal (dibuat oleh `python/buat_lagu.py`)
+  hanya diputar di **layar menu** (Beranda, daftar Contoh/Latihan/Cerita/Misi, Pengaturan, Pasang) dan
+  **berhenti otomatis** saat siswa belajar atau mengerjakan soal, saat Kartu Rumus dibuka, dan saat
+  aplikasi diminimalkan. Alasannya: prinsip koherensi (Mayer) menyatakan musik latar dapat menambah beban
+  ekstrinsik saat belajar. Siswa dapat mematikannya dengan tombol 🔊/🔇 di header atau di Pengaturan.
 - Animasi hanya untuk **menjelaskan** (mis. juring "tumbuh" saat sudut berubah), durasi ≤ 300 ms.
 - Hormati pengaturan `prefers-reduced-motion`.
-- Tanpa suara otomatis.
+- Tidak ada suara yang berbunyi sebelum siswa menyentuh layar (aturan autoplay browser).
 - Umpan balik benar: centang hijau + kalimat singkat ("Tepat! Panjang → keliling."), tanpa konfeti berlebihan.
 
 ## 6. Daftar Cek Kegunaan

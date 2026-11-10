@@ -13,4 +13,5 @@ export const MODUL: Modul[] = [
   { id: 'contoh', path: '/contoh', judul: 'Contoh Soal', ringkas: 'Langkah demi langkah' },
   { id: 'latihan', path: '/latihan', judul: 'Latihan', ringkas: 'Cek jawaban dan pembahasan' },
   { id: 'cerita', path: '/cerita', judul: 'Soal Cerita', ringkas: 'Tandai yang diketahui' },
+  { id: 'literasi', path: '/literasi', judul: 'Misi Literasi', ringkas: 'Matematika di sekitar kita' },
 ];

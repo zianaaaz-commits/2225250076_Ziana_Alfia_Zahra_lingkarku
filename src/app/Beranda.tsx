@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MODUL } from '../content/modul';
+import { sudahTerpasang } from '../lib/pasang';
 import { modulSelesai, useProgres } from './ProgresContext';
 
 export default function Beranda() {
@@ -49,6 +50,15 @@ export default function Beranda() {
           );
         })}
       </ol>
+
+      {!sudahTerpasang() && (
+        <Link
+          to="/pasang"
+          className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded-xl border border-dashed border-aksi font-semibold text-aksi"
+        >
+          📲 Pasang LingkarKu di HP
+        </Link>
+      )}
     </section>
   );
 }

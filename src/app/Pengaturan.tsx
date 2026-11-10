@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import PilihanSegmen from '../components/PilihanSegmen';
 import Tombol from '../components/Tombol';
 import type { Pi } from '../lib/geometri';
@@ -25,6 +26,27 @@ export default function Pengaturan() {
           ]}
         />
       </div>
+
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold">Lagu latar</p>
+        <PilihanSegmen
+          label="Lagu latar"
+          nilai={progres.pengaturan.musik ? 'nyala' : 'mati'}
+          ubah={(v) => aturPengaturan({ musik: v === 'nyala' })}
+          pilihan={[
+            { nilai: 'nyala', teks: '🔊 Nyala' },
+            { nilai: 'mati', teks: '🔇 Mati' },
+          ]}
+        />
+        <p className="text-sm text-gray-600">Lagu hanya diputar di layar menu dan berhenti saat kamu belajar.</p>
+      </div>
+
+      <Link
+        to="/pasang"
+        className="flex min-h-12 items-center justify-center rounded-xl border border-gray-300 font-semibold"
+      >
+        📲 Pasang aplikasi di HP / laptop
+      </Link>
 
       <div className="flex flex-col gap-2">
         <p className="font-semibold">Nilai π awal di Simulasi</p>

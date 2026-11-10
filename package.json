@@ -1,7 +1,7 @@
 {
   "name": "lingkarku",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Aplikasi pembelajaran Panjang Busur dan Luas Juring untuk siswa SMP berbasis Teori Beban Kognitif.",
   "author": "Ziana Alfia Zahra",
   "license": "MIT",
@@ -15,11 +15,16 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "ikon": "node scripts/buat-ikon.mjs",
+    "periksa:python": "tsx scripts/ekspor-konten.ts && python python/periksa_kunci.py",
+    "test:python": "python -m unittest discover -s python/tests -v",
+    "lagu": "python python/buat_lagu.py",
+    "qr": "python python/buat_qr.py",
     "android": "npm run build && npx cap sync android",
     "android:buka": "npm run android && npx cap open android"
   },
   "dependencies": {
     "@capacitor/android": "^8.6.0",
+    "@capacitor/app": "^8.1.2",
     "@capacitor/core": "^8.6.0",
     "katex": "^0.19.1",
     "react": "^18.3.1",
@@ -43,6 +48,7 @@
     "prettier": "^3.9.10",
     "sharp": "^0.35.5",
     "tailwindcss": "^4.3.5",
+    "tsx": "^4.23.15",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.72.2",
     "vite": "^8.3.7",

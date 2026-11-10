@@ -1,29 +1,19 @@
 # LingkarKu — Belajar Panjang Busur & Luas Juring
 
 Aplikasi pembelajaran matematika interaktif untuk siswa SMP pada materi
-**Panjang Busur dan Luas Juring**, dirancang berdasarkan **Teori Beban Kognitif**.
-Dapat dijalankan di browser (web/PWA) dan di smartphone Android.
+**Panjang Busur dan Luas Juring**, dirancang berdasarkan **Teori Beban Kognitif**
+dan untuk menumbuhkembangkan **literasi matematika**.
 
-> Status: **versi 0.1 (prototipe lengkap)** — keenam fitur selesai dan teruji; siap divalidasi ahli.
-> APK Android perlu dibuat dengan Android Studio (lihat bagian "Membuat APK").
+## 🚀 Coba & pasang (tanpa Play Store / App Store)
 
-## Menjalankan
+| Cara | Langkah |
+|---|---|
+| **Buka di browser** | **https://zianaaaz-commits.github.io/lingkarku/** (HP, tablet, atau laptop) |
+| **Pasang di Android / laptop** | Buka alamat di atas di Chrome → menu ⋮ → **Instal aplikasi** (atau tombol 📲 di aplikasi) |
+| **Pasang di iPhone / iPad** | Buka di Safari → **Bagikan** → **Tambahkan ke Layar Utama** |
+| **File APK Android** | [Unduh LingkarKu.apk](https://github.com/zianaaaz-commits/lingkarku/releases/latest/download/LingkarKu.apk) → buka di HP → izinkan *Instal aplikasi tidak dikenal* |
 
-```bash
-npm install
-npm run dev        # buka http://localhost:5173
-npm run test       # 120 unit test
-npm run build      # hasil web (PWA) di folder dist/
-```
-
-## Membuat APK Android
-
-1. Pasang [Android Studio](https://developer.android.com/studio) (sudah termasuk JDK & Android SDK).
-2. Jalankan `npm run android:buka` — membangun aplikasi, menyalin ke `android/`, lalu membuka Android Studio.
-3. Di Android Studio: **Build ▸ Build App Bundle(s) / APK(s) ▸ Build APK(s)**.
-4. APK ada di `android/app/build/outputs/apk/debug/app-debug.apk` — salin ke ponsel untuk dipasang.
-
-Setiap kali kode diubah, jalankan lagi `npm run android` sebelum build ulang di Android Studio.
+Setelah dipasang, aplikasi **tetap berjalan tanpa internet**.
 
 ## Mengapa aplikasi ini dibuat?
 
@@ -37,31 +27,73 @@ Hasil wawancara dengan siswa kelas IX menunjukkan bahwa siswa:
 - menginginkan **lingkaran yang bisa diubah sudut dan jari-jarinya**, **pembahasan soal**,
   dan **tampilan sederhana**.
 
-## Fitur Utama (rencana)
+## Fitur
 
-1. **Pemanasan Unsur Lingkaran** — jari-jari, diameter, sudut pusat, keliling, luas.
-2. **Busur vs Juring** — pembeda visual (garis oranye vs daerah biru).
-3. **Simulasi Lingkaran** — geser sudut dan jari-jari, lihat busur & juring berubah langsung.
-4. **Contoh Soal Bertahap** — langkah muncul satu per satu.
-5. **Latihan + Pembahasan** — umpan balik sesuai jenis kesalahan.
-6. **Soal Cerita Terpandu** — tandai "diketahui" dan "ditanya".
+1. **Ingat Lagi**: jari-jari, diameter, sudut pusat, keliling, luas + kuis cek cepat.
+2. **Busur vs Juring**: pembeda visual (garis oranye vs daerah biru) + permainan.
+3. **Simulasi**: geser sudut & jari-jari; mode *Bandingkan* dan *Tebak Dulu*.
+4. **Contoh Soal**: 6 contoh langkah demi langkah + soal melengkapi.
+5. **Latihan**: 3 level, umpan balik sesuai jenis kesalahan, petunjuk, pembahasan, soal acak.
+6. **Soal Cerita**: tandai *Diketahui/Ditanya*, abaikan informasi pengecoh.
+7. **Misi Literasi**: 4 masalah kontekstual: Pahami → Rumuskan → Hitung → Tafsirkan → Jelaskan.
+
+Plus: Kartu Rumus, progres tersimpan, lagu latar orisinal (hanya di menu), mode offline.
+
+## Teknologi & bahasa
+
+| Bagian | Bahasa / alat |
+|---|---|
+| Aplikasi (berjalan di browser & APK) | **JavaScript** (ditulis dalam TypeScript = JavaScript + pengecekan tipe), React, Tailwind CSS, KaTeX, SVG |
+| Web terpasang (PWA) & APK | vite-plugin-pwa, Capacitor (Android) |
+| Alat bantu & analisis data | **Python 3.13**: lihat tabel di bawah |
+| Otomatisasi | GitHub Actions → GitHub Pages (web) & GitHub Releases (APK) |
+
+### Alat Python (`python/`)
+
+| Skrip | Fungsi |
+|---|---|
+| `buat_lagu.py` | Menyusun lagu latar orisinal (sintesis suara, tanpa hak cipta pihak lain) |
+| `periksa_kunci.py` | Memeriksa ulang **semua** kunci jawaban dengan pecahan eksak |
+| `analisis_penelitian.py` | Analisis data penelitian: validasi ahli, N-gain, beban kognitif |
+| `buat_qr.py` | Kode QR alamat web untuk dibagikan di kelas |
+| `buat_kunci_android.py` | Membuat kunci tanda tangan APK (disimpan di luar repo) |
+
+Contoh analisis (data contoh fiktif di `python/data/contoh/`):
+
+```bash
+python python/analisis_penelitian.py ngain python/data/contoh/pretest_posttest.csv
+python python/analisis_penelitian.py validasi data_validasi.csv --keluaran hasil.csv
+```
+
+## Pengembangan
+
+```bash
+npm install
+npm run dev              # http://localhost:5173
+npm test                 # unit test JavaScript
+npm run test:python      # unit test Python
+npm run periksa:python   # Python memeriksa ulang semua kunci jawaban
+npm run build            # hasil web (PWA) di dist/
+```
+
+**Rilis APK baru:** buat tag, lalu GitHub Actions membuat APK dan melampirkannya ke Releases.
+
+```bash
+git tag v0.2.1 && git push origin v0.2.1
+```
 
 ## Dokumen Perencanaan
 
-Mulai dari [CLAUDE.md](CLAUDE.md), lalu baca folder [docs/](docs/):
-
-1. [Analisis Kebutuhan](docs/01-analisis-kebutuhan.md)
-2. [Spesifikasi Produk](docs/02-spesifikasi-produk.md)
-3. [Desain Pembelajaran](docs/03-desain-pembelajaran.md)
-4. [Konten Materi & Bank Soal](docs/04-konten-materi.md)
-5. [Arsitektur Teknis](docs/05-arsitektur-teknis.md)
-6. [Desain UI/UX](docs/06-desain-ui-ux.md)
-7. [Roadmap](docs/07-roadmap.md)
-8. [Rencana Evaluasi](docs/08-rencana-evaluasi.md)
-
-## Teknologi
-
-React + TypeScript + Vite · Tailwind CSS · KaTeX · SVG · PWA · Capacitor (Android)
+Mulai dari [CLAUDE.md](CLAUDE.md), lalu folder [docs/](docs/):
+[Analisis Kebutuhan](docs/01-analisis-kebutuhan.md) ·
+[Spesifikasi](docs/02-spesifikasi-produk.md) ·
+[Desain Pembelajaran](docs/03-desain-pembelajaran.md) ·
+[Konten & Bank Soal](docs/04-konten-materi.md) ·
+[Arsitektur](docs/05-arsitektur-teknis.md) ·
+[UI/UX](docs/06-desain-ui-ux.md) ·
+[Roadmap](docs/07-roadmap.md) ·
+[Evaluasi](docs/08-rencana-evaluasi.md) ·
+[Literasi Matematika](docs/09-literasi-matematika.md)
 
 ## Penyusun
 

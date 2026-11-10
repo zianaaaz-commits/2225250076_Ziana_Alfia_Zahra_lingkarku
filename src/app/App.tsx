@@ -14,6 +14,8 @@ import ContohDetail from '../features/contoh/ContohDetail';
 import Latihan from '../features/latihan/Latihan';
 import SesiLatihan from '../features/latihan/SesiLatihan';
 import { CeritaDaftar, CeritaDetail } from '../features/cerita/Cerita';
+import { LiterasiDaftar, LiterasiDetail } from '../features/literasi/Literasi';
+import Pasang from './Pasang';
 
 const HALAMAN: Record<string, ReactElement> = {
   prasyarat: <Prasyarat />,
@@ -22,6 +24,7 @@ const HALAMAN: Record<string, ReactElement> = {
   contoh: <ContohDaftar />,
   latihan: <Latihan />,
   cerita: <CeritaDaftar />,
+  literasi: <LiterasiDaftar />,
 };
 
 // HashRouter dipakai agar routing aman saat dijalankan sebagai file lokal di Capacitor.
@@ -38,7 +41,9 @@ export default function App() {
             <Route path="/contoh/:id" element={<ContohDetail />} />
             <Route path="/latihan/:level" element={<SesiLatihan />} />
             <Route path="/cerita/:id" element={<CeritaDetail />} />
+            <Route path="/literasi/:id" element={<LiterasiDetail />} />
             <Route path="/pengaturan" element={<Pengaturan />} />
+            <Route path="/pasang" element={<Pasang />} />
             <Route path="*" element={<SegeraHadir judul="Halaman tidak ditemukan" />} />
           </Route>
         </Routes>

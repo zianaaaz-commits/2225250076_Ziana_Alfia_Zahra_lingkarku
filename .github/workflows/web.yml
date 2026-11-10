@@ -1,0 +1,68 @@
+# Uji (JavaScript + Python) lalu terbitkan aplikasi web ke GitHub Pages.
+# Alamat: https://zianaaaz-commits.github.io/lingkarku/
+name: Uji & terbitkan web
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  uji:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Pasang dependensi
+        run: |
+          npm ci
+          pip install -r python/requirements.txt
+
+      - name: Lint & uji JavaScript
+        run: |
+          npm run lint
+          npm test
+
+      - name: Uji Python & periksa ulang kunci jawaban
+        run: |
+          npx tsx scripts/ekspor-konten.ts
+          python -m unittest discover -s python/tests -v
+          python python/periksa_kunci.py
+
+      - name: Build
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
+        with:
+          path: dist
+
+  terbitkan:
+    if: github.event_name != 'pull_request'
+    needs: uji
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

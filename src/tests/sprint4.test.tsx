@@ -59,7 +59,7 @@ describe('progress.ts', () => {
         </MemoryRouter>
       </ProgresProvider>,
     );
-    expect(screen.getByText('1 dari 6 langkah selesai.')).toBeInTheDocument();
+    expect(screen.getByText('1 dari 7 langkah selesai.')).toBeInTheDocument();
     expect(screen.getAllByLabelText('selesai')).toHaveLength(1);
     expect(screen.getByText('Lanjut ▶')).toBeInTheDocument();
   });

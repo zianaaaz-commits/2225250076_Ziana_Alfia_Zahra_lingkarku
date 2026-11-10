@@ -1,0 +1,76 @@
+# Membuat APK Android (bisa dipasang tanpa Play Store).
+# - Push tag "v*" (mis. v0.2.0) → APK dilampirkan ke GitHub Releases sebagai LingkarKu.apk
+# - Jalankan manual (workflow_dispatch) → APK tersedia sebagai artifact
+name: Buat APK Android
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Build web & salin ke Android
+        run: |
+          npm ci
+          npm run build
+          npx cap sync android
+
+      - name: Siapkan kunci tanda tangan
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ]; then
+            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/rilis.p12"
+            echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/rilis.p12" >> "$GITHUB_ENV"
+          else
+            echo "::warning::Secret ANDROID_KEYSTORE_BASE64 belum diatur; APK tidak ditandatangani dengan kunci rilis."
+          fi
+
+      - name: Build APK
+        working-directory: android
+        env:
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          VERSION_CODE: ${{ github.run_number }}
+          VERSION_NAME: ${{ github.ref_type == 'tag' && github.ref_name || '0.0.0-uji' }}
+        run: |
+          chmod +x gradlew
+          if [ -n "$ANDROID_KEYSTORE_PATH" ]; then
+            ./gradlew assembleRelease --no-daemon
+            cp app/build/outputs/apk/release/app-release.apk ../LingkarKu.apk
+          else
+            ./gradlew assembleDebug --no-daemon
+            cp app/build/outputs/apk/debug/app-debug.apk ../LingkarKu.apk
+          fi
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LingkarKu-apk
+          path: LingkarKu.apk
+
+      - name: Lampirkan ke GitHub Releases
+        if: github.ref_type == 'tag'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" LingkarKu.apk \
+            --title "LingkarKu ${{ github.ref_name }}" \
+            --notes "Unduh **LingkarKu.apk** di bawah, lalu buka di HP Android untuk memasang (izinkan *Instal aplikasi tidak dikenal*). Versi web: https://zianaaaz-commits.github.io/lingkarku/"

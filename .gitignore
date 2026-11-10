@@ -12,6 +12,16 @@ android/.gradle/
 android/app/src/main/assets/public/
 android/local.properties
 
+# Python: cache & hasil ekspor sementara (dibuat ulang oleh `npm run periksa:python`)
+__pycache__/
+*.pyc
+python/data/konten.json
+
+# Kunci tanda tangan APK — JANGAN PERNAH di-commit
+*.p12
+*.jks
+*.keystore
+
 # Lain-lain
 *.log
 .DS_Store

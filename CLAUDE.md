@@ -34,6 +34,11 @@ Pengembang: Ziana Alfia Zahra (S1 Pendidikan Matematika, NIM 2225250076).
 | Web/offline | `vite-plugin-pwa` |
 | Android | Capacitor (`@capacitor/android`) |
 | Uji | Vitest + React Testing Library |
+| Python 3.13 | Alat bantu & analisis: `python/` (lagu, QR, pemeriksa kunci, analisis data penelitian, kunci APK) |
+| CI/CD | GitHub Actions: `web.yml` (uji + GitHub Pages), `apk.yml` (APK ke GitHub Releases) |
+
+Bahasa pemrograman: **TypeScript** (JavaScript + pengecekan tipe; saat build diubah menjadi JavaScript
+biasa yang dijalankan browser) dan **Python** (alat bantu & analisis data, tidak berjalan di aplikasi).
 
 Alasan dan alternatif: [docs/05-arsitektur-teknis.md](docs/05-arsitektur-teknis.md).
 
@@ -50,6 +55,10 @@ npm run preview        # pratinjau hasil build
 npm run test           # jalankan unit test (Vitest)
 npm run lint           # ESLint
 npm run ikon           # buat ulang ikon PNG dari public/icon*.svg
+npm run periksa:python # ekspor konten → Python memeriksa ulang semua kunci (pecahan eksak)
+npm run test:python    # unit test alat Python
+npm run lagu           # buat ulang lagu latar (public/audio/lagu-latar.wav)
+npm run qr             # buat ulang kode QR alamat web (perlu: pip install -r python/requirements.txt)
 npm run android        # build + salin dist/ ke proyek android/
 npm run android:buka   # seperti di atas, lalu buka Android Studio untuk build APK
 ```
@@ -102,7 +111,8 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
 7. **Contoh dulu, baru latihan** (worked example → completion problem → soal mandiri). (GL01, GL02)
 8. **Umpan balik spesifik kesalahan**, bukan hanya "Benar/Salah". Gunakan `lib/feedback.ts`. (DS02, IL05, GL02)
 9. **Soal cerita** selalu menyediakan alat bantu "tandai yang diketahui & ditanya". (EL05)
-10. **Tanpa elemen dekoratif yang tidak mengajar**: tanpa animasi latar, maskot bergerak, musik, atau iklan. (DS03, prinsip koherensi)
+10. **Tanpa elemen dekoratif yang tidak mengajar**: tanpa animasi latar, maskot bergerak, atau iklan. Lagu latar **hanya di layar menu** (`lib/musik.ts` → `HALAMAN_MENU`); jangan memutarnya di layar belajar. (DS03, prinsip koherensi)
+11. **Literasi matematika**: masalah kontekstual mengikuti 5 tahap Pahami → Rumuskan → Hitung → Tafsirkan → Jelaskan (lihat [docs/09-literasi-matematika.md](docs/09-literasi-matematika.md)).
 
 ## 6. Aturan Konten Matematika
 
@@ -145,3 +155,4 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
 | [docs/06-desain-ui-ux.md](docs/06-desain-ui-ux.md) | Wireframe, panduan gaya |
 | [docs/07-roadmap.md](docs/07-roadmap.md) | Tahapan & daftar tugas |
 | [docs/08-rencana-evaluasi.md](docs/08-rencana-evaluasi.md) | Validasi ahli, uji coba, instrumen beban kognitif |
+| [docs/09-literasi-matematika.md](docs/09-literasi-matematika.md) | Kerangka & fitur literasi matematika (PISA/AKM) |

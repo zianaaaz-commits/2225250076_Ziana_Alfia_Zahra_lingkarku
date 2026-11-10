@@ -20,6 +20,34 @@ body {
   font-size: 17px;
 }
 
+/* ---- Ponsel ---- */
+html {
+  -webkit-tap-highlight-color: transparent; /* tanpa kilatan biru saat diketuk */
+  -webkit-text-size-adjust: 100%; /* iOS tidak memperbesar teks sendiri */
+}
+body {
+  overflow-x: clip; /* cegah geser ke samping yang tidak sengaja */
+  overscroll-behavior-y: none;
+}
+/* Hindari area poni/kamera & garis navigasi gestur */
+#root {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}
+button,
+a,
+input,
+label {
+  touch-action: manipulation; /* hilangkan jeda 300 ms & zoom ketuk-ganda */
+}
+/* Rumus panjang boleh turun baris di layar sempit */
+.katex {
+  white-space: normal;
+}
+.katex .base {
+  margin-bottom: 0.15em;
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;

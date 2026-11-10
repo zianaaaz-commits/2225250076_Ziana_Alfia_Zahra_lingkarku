@@ -7,6 +7,8 @@ export type Level = '1' | '2' | '3';
 export interface Pengaturan {
   hurufBesar: boolean;
   piDefault: Pi;
+  /** Lagu latar di layar menu (berhenti otomatis saat belajar). */
+  musik: boolean;
 }
 
 export interface Progres {
@@ -25,7 +27,7 @@ export const progresAwal = (): Progres => ({
   versi: 1,
   selesai: [],
   skor: {},
-  pengaturan: { hurufBesar: false, piDefault: '22/7' },
+  pengaturan: { hurufBesar: false, piDefault: '22/7', musik: true },
 });
 
 export function bacaProgres(): Progres {

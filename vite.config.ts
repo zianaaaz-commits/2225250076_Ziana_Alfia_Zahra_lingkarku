@@ -32,7 +32,7 @@ export default defineConfig({
       },
       workbox: {
         // Semua berkas aplikasi disimpan untuk offline; font KaTeX cukup versi woff2.
-        globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
+        globPatterns: ['**/*.{js,css,html,svg,png,woff2,wav}'],
       },
     }),
   ],
