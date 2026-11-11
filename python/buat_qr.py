@@ -10,7 +10,7 @@ from pathlib import Path
 import qrcode
 import qrcode.image.svg
 
-URL_WEB = "https://zianaaaz-commits.github.io/lingkarku/"
+URL_WEB = "https://zianaaaz-commits.github.io/2225250076_Ziana_Alfia_Zahra_lingkarku/"
 KELUARAN = Path(__file__).resolve().parent.parent / "public" / "qr-lingkarku.svg"
 
 

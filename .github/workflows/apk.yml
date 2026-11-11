@@ -73,4 +73,4 @@ jobs:
         run: |
           gh release create "${{ github.ref_name }}" LingkarKu.apk \
             --title "LingkarKu ${{ github.ref_name }}" \
-            --notes "Unduh **LingkarKu.apk** di bawah, lalu buka di HP Android untuk memasang (izinkan *Instal aplikasi tidak dikenal*). Versi web: https://zianaaaz-commits.github.io/lingkarku/"
+            --notes "Unduh **LingkarKu.apk** di bawah, lalu buka di HP Android untuk memasang (izinkan *Instal aplikasi tidak dikenal*). Versi web: https://zianaaaz-commits.github.io/2225250076_Ziana_Alfia_Zahra_lingkarku/"

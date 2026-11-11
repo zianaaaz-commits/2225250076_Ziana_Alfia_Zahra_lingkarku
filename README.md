@@ -8,10 +8,10 @@ dan untuk menumbuhkembangkan **literasi matematika**.
 
 | Cara | Langkah |
 |---|---|
-| **Buka di browser** | **https://zianaaaz-commits.github.io/lingkarku/** (HP, tablet, atau laptop) |
+| **Buka di browser** | **https://zianaaaz-commits.github.io/2225250076_Ziana_Alfia_Zahra_lingkarku/** (HP, tablet, atau laptop) |
 | **Pasang di Android / laptop** | Buka alamat di atas di Chrome → menu ⋮ → **Instal aplikasi** (atau tombol 📲 di aplikasi) |
 | **Pasang di iPhone / iPad** | Buka di Safari → **Bagikan** → **Tambahkan ke Layar Utama** |
-| **File APK Android** | [Unduh LingkarKu.apk](https://github.com/zianaaaz-commits/lingkarku/releases/latest/download/LingkarKu.apk) → buka di HP → izinkan *Instal aplikasi tidak dikenal* |
+| **File APK Android** | [Unduh LingkarKu.apk](https://github.com/zianaaaz-commits/2225250076_Ziana_Alfia_Zahra_lingkarku/releases/latest/download/LingkarKu.apk) → buka di HP → izinkan *Instal aplikasi tidak dikenal* |
 
 Setelah dipasang, aplikasi **tetap berjalan tanpa internet**.
 
