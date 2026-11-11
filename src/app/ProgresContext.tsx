@@ -5,6 +5,7 @@ import { LITERASI } from '../content/literasi';
 import {
   bacaProgres,
   denganSelesai,
+  denganSiswa,
   denganSkor,
   lulusLevel,
   progresAwal,
@@ -19,6 +20,8 @@ interface NilaiProgres {
   tandai: (id: string) => void;
   catatSkor: (level: Level, nilai: number) => void;
   aturPengaturan: (ubah: Partial<Pengaturan>) => void;
+  /** Menyimpan nama & kelas yang sudah dirapikan (lihat rapikanSiswa). */
+  aturSiswa: (nama: string, kelas: string) => void;
   reset: () => void;
 }
 
@@ -28,6 +31,7 @@ const Ctx = createContext<NilaiProgres>({
   tandai: () => {},
   catatSkor: () => {},
   aturPengaturan: () => {},
+  aturSiswa: () => {},
   reset: () => {},
 });
 
@@ -45,11 +49,16 @@ export function ProgresProvider({ children }: { children: ReactNode }) {
     (ubah: Partial<Pengaturan>) => setProgres((p) => ({ ...p, pengaturan: { ...p.pengaturan, ...ubah } })),
     [],
   );
-  const reset = useCallback(() => setProgres((p) => ({ ...progresAwal(), pengaturan: p.pengaturan })), []);
+  const aturSiswa = useCallback((nama: string, kelas: string) => setProgres((p) => denganSiswa(p, nama, kelas)), []);
+  // Hapus progres belajar saja; data diri & pengaturan tetap.
+  const reset = useCallback(
+    () => setProgres((p) => ({ ...progresAwal(), pengaturan: p.pengaturan, ...(p.siswa ? { siswa: p.siswa } : {}) })),
+    [],
+  );
 
   const nilai = useMemo(
-    () => ({ progres, tandai, catatSkor, aturPengaturan, reset }),
-    [progres, tandai, catatSkor, aturPengaturan, reset],
+    () => ({ progres, tandai, catatSkor, aturPengaturan, aturSiswa, reset }),
+    [progres, tandai, catatSkor, aturPengaturan, aturSiswa, reset],
   );
   return <Ctx.Provider value={nilai}>{children}</Ctx.Provider>;
 }

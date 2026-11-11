@@ -133,7 +133,10 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
 - Konten (teks, soal, pembahasan) disimpan di `src/content/`, bukan di-hardcode dalam JSX.
 - Target layar utama: **ponsel Android 360×640** (mobile-first). Tombol minimal 44×44 px.
 - Aksesibilitas: kontras warna minimal 4.5:1, slider dapat digeser dengan jari dan keyboard, semua gambar SVG punya `aria-label`.
-- Tidak mengumpulkan data pribadi siswa. Tidak ada login, tidak ada analitik pihak ketiga.
+- Data pribadi: siswa **wajib mengisi nama & kelas** di layar awal (`SelamatDatang`), tetapi data itu
+  **hanya disimpan di perangkat** (`localStorage`) dan tidak pernah dikirim otomatis ke server mana pun.
+  Guru menerimanya hanya bila siswa sendiri membagikan **Kartu Hasil** (`/hasil`). Tidak ada login,
+  tidak ada analitik pihak ketiga. Jangan menambah pengiriman data tanpa persetujuan pemilik proyek.
 - Komentar kode boleh Bahasa Indonesia atau Inggris, konsisten per file.
 
 ## 8. Yang JANGAN Dilakukan

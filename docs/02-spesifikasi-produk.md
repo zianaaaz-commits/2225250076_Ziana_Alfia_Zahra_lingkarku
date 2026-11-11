@@ -85,6 +85,16 @@ Kriteria penerimaan:
 - [ ] Tombol "Ubah jadi gambar" menampilkan sketsa lingkaran dari informasi soal.
 - [ ] Pertanyaan pemandu: "Yang ditanya panjang atau luas?"
 
+### F0 — Data Diri & Kartu Hasil
+> Sebagai guru, saya ingin tahu siapa yang memakai aplikasi dan sejauh mana hasil belajarnya.
+
+Kriteria penerimaan:
+- [x] Layar pertama mewajibkan **nama lengkap** (2–40 karakter, memuat huruf) dan **kelas** (1–12 karakter).
+- [x] Data hanya disimpan di perangkat; dapat diubah di Pengaturan; tidak terhapus oleh "Hapus progres".
+- [x] Beranda menyapa siswa ("Halo, Rani! Kelas IX-A").
+- [x] **Kartu Hasil** (`/hasil`): nama, kelas, tanggal, modul selesai, skor terbaik tiap level;
+      tombol **Bagikan ke guru** (menu Bagikan HP / salin teks) atau screenshot.
+
 ### Fitur Pendukung
 - **Beranda:** peta belajar 6 langkah dengan tanda selesai.
 - **Progres:** disimpan di perangkat (localStorage); tombol "Reset progres".
@@ -101,7 +111,7 @@ Kriteria penerimaan:
 | Offline | Seluruh fitur jalan tanpa internet setelah dipasang/dibuka sekali |
 | Tampilan | Mobile-first, mendukung 360 px hingga desktop |
 | Aksesibilitas | Kontras ≥ 4.5:1, tombol ≥ 44 px, ukuran huruf bisa diperbesar |
-| Privasi | Tanpa data pribadi, tanpa login, tanpa pelacak pihak ketiga |
+| Privasi | Nama & kelas hanya di perangkat (dibagikan siswa secara sukarela lewat Kartu Hasil); tanpa login, tanpa pelacak pihak ketiga |
 | Bahasa | Bahasa Indonesia |
 
 ## 5. Indikator Keberhasilan

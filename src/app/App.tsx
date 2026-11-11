@@ -4,7 +4,9 @@ import Layout from './Layout';
 import Beranda from './Beranda';
 import Pengaturan from './Pengaturan';
 import SegeraHadir from './SegeraHadir';
-import { ProgresProvider } from './ProgresContext';
+import { ProgresProvider, useProgres } from './ProgresContext';
+import SelamatDatang from './SelamatDatang';
+import KartuHasil from './KartuHasil';
 import { MODUL } from '../content/modul';
 import Prasyarat from '../features/prasyarat/Prasyarat';
 import Konsep from '../features/konsep/Konsep';
@@ -27,26 +29,40 @@ const HALAMAN: Record<string, ReactElement> = {
   literasi: <LiterasiDaftar />,
 };
 
+/** Siswa wajib mengisi nama & kelas sebelum memakai aplikasi. */
+export function Halaman() {
+  const { progres } = useProgres();
+  if (!progres.siswa) return <SelamatDatang />;
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Beranda />} />
+        {MODUL.map((m) => (
+          <Route
+            key={m.id}
+            path={m.path}
+            element={HALAMAN[m.id] ?? <SegeraHadir judul={m.judul} />}
+          />
+        ))}
+        <Route path="/contoh/:id" element={<ContohDetail />} />
+        <Route path="/latihan/:level" element={<SesiLatihan />} />
+        <Route path="/cerita/:id" element={<CeritaDetail />} />
+        <Route path="/literasi/:id" element={<LiterasiDetail />} />
+        <Route path="/pengaturan" element={<Pengaturan />} />
+        <Route path="/pasang" element={<Pasang />} />
+        <Route path="/hasil" element={<KartuHasil />} />
+        <Route path="*" element={<SegeraHadir judul="Halaman tidak ditemukan" />} />
+      </Route>
+    </Routes>
+  );
+}
+
 // HashRouter dipakai agar routing aman saat dijalankan sebagai file lokal di Capacitor.
 export default function App() {
   return (
     <ProgresProvider>
       <HashRouter>
-        <Routes>
-          <Route element={<Layout />}>
-            <Route index element={<Beranda />} />
-            {MODUL.map((m) => (
-              <Route key={m.id} path={m.path} element={HALAMAN[m.id] ?? <SegeraHadir judul={m.judul} />} />
-            ))}
-            <Route path="/contoh/:id" element={<ContohDetail />} />
-            <Route path="/latihan/:level" element={<SesiLatihan />} />
-            <Route path="/cerita/:id" element={<CeritaDetail />} />
-            <Route path="/literasi/:id" element={<LiterasiDetail />} />
-            <Route path="/pengaturan" element={<Pengaturan />} />
-            <Route path="/pasang" element={<Pasang />} />
-            <Route path="*" element={<SegeraHadir judul="Halaman tidak ditemukan" />} />
-          </Route>
-        </Routes>
+        <Halaman />
       </HashRouter>
     </ProgresProvider>
   );

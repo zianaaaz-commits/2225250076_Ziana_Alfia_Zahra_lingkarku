@@ -85,4 +85,7 @@ perubahan. Contoh pertanyaan:
 
 - Izin sekolah dan persetujuan siswa/orang tua sebelum uji coba.
 - Gunakan kode responden (S01, S02, …), bukan nama, dalam laporan.
+- Aplikasi meminta **nama & kelas** di awal, hanya disimpan di HP siswa. Siswa mengirim **Kartu Hasil**
+  (nama, kelas, modul selesai, skor latihan) kepada guru/peneliti secara sukarela (screenshot/WhatsApp).
+  Saat mengolah data, ganti nama menjadi kode responden dan simpan daftar pasangan nama–kode secara terpisah.
 - Foto/rekaman hanya dengan izin; samarkan wajah jika dipublikasikan.

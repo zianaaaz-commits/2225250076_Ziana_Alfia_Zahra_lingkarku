@@ -2,7 +2,7 @@
 // Saat siswa belajar/mengerjakan soal, lagu berhenti agar tidak menambah beban ekstrinsik.
 
 /** Halaman "menu" tempat lagu boleh diputar. */
-export const HALAMAN_MENU = ['/', '/contoh', '/latihan', '/cerita', '/literasi', '/pengaturan', '/pasang'];
+export const HALAMAN_MENU = ['/', '/contoh', '/latihan', '/cerita', '/literasi', '/pengaturan', '/pasang', '/hasil'];
 
 export const bolehPutar = (pathname: string): boolean => HALAMAN_MENU.includes(pathname);
 

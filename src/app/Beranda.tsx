@@ -11,6 +11,12 @@ export default function Beranda() {
 
   return (
     <section>
+      {progres.siswa && (
+        <p className="mb-1 font-semibold text-aksi">
+          Halo, {progres.siswa.nama.split(' ')[0]}! 👋{' '}
+          <span className="font-normal text-gray-600">Kelas {progres.siswa.kelas}</span>
+        </p>
+      )}
       <h1 className="mb-1 text-2xl font-bold">Busur &amp; Juring</h1>
       <p className="mb-5 text-gray-600">
         {jumlahSelesai === 0
@@ -51,10 +57,17 @@ export default function Beranda() {
         })}
       </ol>
 
+      <Link
+        to="/hasil"
+        className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded-xl bg-aksi font-semibold text-white"
+      >
+        📋 Kartu Hasil (kirim ke guru)
+      </Link>
+
       {!sudahTerpasang() && (
         <Link
           to="/pasang"
-          className="mt-5 flex min-h-12 items-center justify-center gap-2 rounded-xl border border-dashed border-aksi font-semibold text-aksi"
+          className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-xl border border-dashed border-aksi font-semibold text-aksi"
         >
           📲 Pasang LingkarKu di HP
         </Link>

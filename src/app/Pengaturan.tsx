@@ -3,16 +3,36 @@ import { Link } from 'react-router-dom';
 import PilihanSegmen from '../components/PilihanSegmen';
 import Tombol from '../components/Tombol';
 import type { Pi } from '../lib/geometri';
+import FormDataDiri from './FormDataDiri';
 import { useProgres } from './ProgresContext';
 
 export default function Pengaturan() {
   const { progres, aturPengaturan, reset } = useProgres();
   const [yakin, setYakin] = useState(false);
   const [sudahReset, setSudahReset] = useState(false);
+  const [ubahData, setUbahData] = useState(false);
 
   return (
     <section className="flex flex-col gap-6">
       <h1 className="text-2xl font-bold">Pengaturan</h1>
+
+      <div className="flex flex-col gap-2">
+        <p className="font-semibold">Data diri</p>
+        {ubahData ? (
+          <FormDataDiri teksTombol="Simpan" sesudah={() => setUbahData(false)} />
+        ) : (
+          <div className="flex items-center justify-between gap-3 rounded-xl bg-gray-50 p-3">
+            <p>
+              <b>{progres.siswa?.nama}</b>
+              <br />
+              <span className="text-gray-600">Kelas {progres.siswa?.kelas}</span>
+            </p>
+            <Tombol varian="kedua" onClick={() => setUbahData(true)}>
+              Ubah
+            </Tombol>
+          </div>
+        )}
+      </div>
 
       <div className="flex flex-col gap-2">
         <p className="font-semibold">Ukuran huruf</p>
@@ -38,7 +58,9 @@ export default function Pengaturan() {
             { nilai: 'mati', teks: '🔇 Mati' },
           ]}
         />
-        <p className="text-sm text-gray-600">Lagu hanya diputar di layar menu dan berhenti saat kamu belajar.</p>
+        <p className="text-sm text-gray-600">
+          Lagu hanya diputar di layar menu dan berhenti saat kamu belajar.
+        </p>
       </div>
 
       <Link
