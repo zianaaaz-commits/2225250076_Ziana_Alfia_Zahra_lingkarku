@@ -39,6 +39,21 @@ Selain warna, gunakan juga **bentuk/ikon** (garis vs daerah) agar ramah buta war
 - Kartu: latar putih, bayangan tipis, padding 16 px.
 - Ikon: sederhana garis (mis. Lucide), tanpa ikon dekoratif berlebihan.
 
+## 2a. Tema Petualangan, Maskot & Foto (keputusan 23 November 2026)
+
+- **Tema "Petualangan Negeri Lingkaran":** Beranda berupa peta dengan jalan berkelok; setiap modul
+  adalah *pos* (🎒 Bekal Petualang → 🍕 Hutan Busur & Juring → 🔬 Laboratorium Lingkaran → 📖 Perpustakaan
+  Contoh → 🏹 Arena Latihan → 📜 Desa Soal Cerita → 🗺️ Misi Dunia Nyata) dan berakhir di 🏆 *Harta Karun:
+  Kartu Hasil*. Pos selesai bertanda ✓; semua pos tetap dapat dibuka (tidak dikunci).
+- **Maskot Si Bulat** (lingkaran oranye bertopi wisuda): **statis**, muncul di layar sambutan, peta,
+  dan layar perayaan (skor/misi selesai). Tidak muncul di tengah langkah pengerjaan soal agar tidak
+  menambah beban ekstrinsik (prinsip koherensi).
+- **Foto konteks pizza** hanya pada soal berkonteks pizza (contoh C6, soal cerita pizza, latihan L3-01,
+  soal acak pizza, permainan Busur/Juring, layar konsep), ukuran kecil (maks. 160 px), dan selalu
+  didampingi diagram berlabel.
+- Sumber gambar: `assets/sumber/` → diolah `python/olah_gambar.py` → `public/gambar/*.webp`.
+  **Lengkapi lisensi/kredit** di `src/content/gambar.ts` (halaman Kredit) sebelum publikasi luas.
+
 ## 3. Peta Layar
 
 ```

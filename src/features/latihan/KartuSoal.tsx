@@ -1,4 +1,5 @@
 import { useId, useMemo, useState } from 'react';
+import FotoKonteks from '../../components/FotoKonteks';
 import KepalaSoal from '../../components/KepalaSoal';
 import KotakUmpanBalik from '../../components/KotakUmpanBalik';
 import MathText from '../../components/MathText';
@@ -49,6 +50,7 @@ export default function KartuSoal({ soal, selesai }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
+      {soal.foto && <FotoKonteks id={soal.foto} />}
       <KepalaSoal
         soal={soal.teks}
         gambar={gambarSoal(soal)}

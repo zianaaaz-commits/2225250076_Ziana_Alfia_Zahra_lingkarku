@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from 'react';
 import CircleSVG from '../../components/CircleSVG';
+import FotoKonteks from '../../components/FotoKonteks';
 import Rumus from '../../components/Rumus';
 import NavLangkah from '../../components/NavLangkah';
 import { WARNA_TEKS } from '../../lib/warna';
@@ -33,9 +34,12 @@ const LAYAR: { judul: string; isi: ReactNode }[] = [
             <p className="text-sm text-gray-600">diukur luasnya (cm²)</p>
           </div>
         </div>
-        <p className="mt-4 rounded-xl bg-gray-50 p-3 text-center">
-          <Juring>Juring</Juring> = sepotong pizza. <Busur>Busur</Busur> = pinggiran rotinya.
-        </p>
+        <div className="mt-4 flex items-center gap-3 rounded-xl bg-gray-50 p-3">
+          <FotoKonteks id="pizza-seperempat" className="max-h-24" />
+          <p>
+            <Juring>Juring</Juring> = sepotong pizza. <Busur>Busur</Busur> = pinggiran rotinya.
+          </p>
+        </div>
       </>
     ),
   },

@@ -57,13 +57,13 @@ describe('layar awal (wajib isi nama & kelas)', () => {
     expect(screen.getByText('Selamat datang di LingkarKu')).toBeInTheDocument();
     expect(screen.queryByText('Busur & Juring')).toBeNull();
 
-    fireEvent.click(screen.getByRole('button', { name: /Mulai belajar/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Mulai petualangan/ }));
     expect(screen.getByText(/minimal 2 huruf/)).toBeInTheDocument();
     expect(screen.queryByText('Busur & Juring')).toBeNull();
 
     fireEvent.change(screen.getByLabelText('Nama lengkap'), { target: { value: 'Rani Putri' } });
     fireEvent.change(screen.getByLabelText('Kelas'), { target: { value: 'IX-A' } });
-    fireEvent.click(screen.getByRole('button', { name: /Mulai belajar/ }));
+    fireEvent.click(screen.getByRole('button', { name: /Mulai petualangan/ }));
 
     expect(screen.getByText(/Halo, Rani!/)).toBeInTheDocument();
     expect(bacaProgres().siswa).toMatchObject({ nama: 'Rani Putri', kelas: 'IX-A' });

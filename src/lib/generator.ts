@@ -1,5 +1,6 @@
 // Pembuat soal acak dari template (GL05: variasi soal). Hanya menerima soal
 // yang semua angkanya "ramah hitung" (bulat atau maks. 2 angka desimal).
+import { fotoPizza, type FotoId } from '../content/gambar';
 import { formatAngka, tepat, type Pi } from './geometri';
 import { hitungKunci, type DataSoal, type Ditanya, type Satuan, type Soal } from './soal';
 
@@ -20,6 +21,7 @@ interface Draf {
   contohTerkait: string;
   /** Angka yang tampil di teks soal; semuanya harus "ramah hitung". */
   angkaTampil?: number[];
+  foto?: FotoId;
 }
 
 let urutan = 0;
@@ -40,6 +42,7 @@ function buat(level: 1 | 2 | 3, template: () => Draf): Soal {
       satuan: d.satuan,
       kunci: Math.round(kunci * 100) / 100,
       contohTerkait: d.contohTerkait,
+      ...(d.foto ? { foto: d.foto } : {}),
     };
   }
   throw new Error('Gagal membuat soal acak');
@@ -108,6 +111,7 @@ function level3(rng: Rng): Draf {
         ditanya: luas ? 'juring' : 'busur',
         satuan: luas ? 'cm²' : 'cm',
         contohTerkait: 'C6',
+        foto: fotoPizza(n),
       };
     }
     case 'jam': {

@@ -1,5 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import KotakUmpanBalik from './KotakUmpanBalik';
+import Perayaan from './Perayaan';
 import Tombol from './Tombol';
 
 export interface ButirKuis {
@@ -34,9 +35,7 @@ export default function Kuis<T extends ButirKuis>({ butir, label = 'Soal', gamba
   if (habis) {
     return (
       <div className="flex flex-col items-center gap-4 py-6 text-center">
-        <p className="text-xl font-bold">
-          Benar {skor} dari {butir.length}
-        </p>
+        <Perayaan judul={`Benar ${skor} dari ${butir.length}`} />
         {akhir?.(skor)}
         <Tombol
           varian="kedua"

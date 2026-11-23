@@ -1,5 +1,6 @@
 import type { Soal } from '../lib/soal';
 import type { GambarSoal } from './contoh';
+import type { FotoId } from './gambar';
 
 // F6 — Soal cerita terpandu (EL05). Siswa menandai informasi "diketahui" dan "ditanya".
 // Token "pengecoh" adalah informasi yang tidak diperlukan untuk menjawab.
@@ -20,6 +21,7 @@ export interface Cerita {
   /** Jawaban pertanyaan pemandu "panjang atau luas?" */
   jenis: 'panjang' | 'luas';
   gambar: GambarSoal;
+  foto?: FotoId;
   soal: Soal;
 }
 
@@ -38,6 +40,7 @@ export const CERITA: Cerita[] = [
     ],
     jenis: 'luas',
     gambar: { r: 14, alpha: 45, pi: '22/7', tampil: 'juring', nilai: false },
+    foto: 'pizza-8-potong',
     soal: { id: 'cerita-pizza', level: 3, teks: 'Pizza berdiameter 28 cm dipotong menjadi 8 bagian sama besar. Berapa luas satu potong?', data: { d: 28, alpha: 45, pi: '22/7' }, ditanya: 'juring', satuan: 'cm²', kunci: 77, contohTerkait: 'C6' },
   },
   {

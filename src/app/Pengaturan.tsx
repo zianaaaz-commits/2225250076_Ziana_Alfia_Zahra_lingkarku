@@ -69,6 +69,9 @@ export default function Pengaturan() {
       >
         📲 Pasang aplikasi di HP / laptop
       </Link>
+      <Link to="/kredit" className="text-center text-sm font-semibold text-aksi underline">
+        Kredit gambar & lagu
+      </Link>
 
       <div className="flex flex-col gap-2">
         <p className="font-semibold">Nilai π awal di Simulasi</p>

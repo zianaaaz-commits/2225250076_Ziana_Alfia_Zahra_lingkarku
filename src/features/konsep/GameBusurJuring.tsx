@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useProgres } from '../../app/ProgresContext';
 import CircleSVG from '../../components/CircleSVG';
+import FotoKonteks from '../../components/FotoKonteks';
+import Perayaan from '../../components/Perayaan';
 import Tombol from '../../components/Tombol';
 import { GAME_BUSUR_JURING } from '../../content/gameBusurJuring';
 import { WARNA } from '../../lib/warna';
@@ -22,10 +24,9 @@ export default function GameBusurJuring({ keluar }: { keluar: () => void }) {
   if (habis) {
     return (
       <div className="flex flex-col items-center gap-4 py-6 text-center">
-        <h2 className="text-2xl font-bold">
-          Benar {skor} dari {GAME_BUSUR_JURING.length}
-        </h2>
-        <p className="text-gray-600">Ingat: panjang → busur, luas → juring.</p>
+        <Perayaan judul={`Benar ${skor} dari ${GAME_BUSUR_JURING.length}`}>
+          Ingat: panjang → busur, luas → juring.
+        </Perayaan>
         <Tombol
           onClick={() => {
             setNo(0);
@@ -67,6 +68,7 @@ export default function GameBusurJuring({ keluar }: { keluar: () => void }) {
       <p className="text-sm text-gray-600">
         Soal {no + 1} dari {GAME_BUSUR_JURING.length}
       </p>
+      {b.foto && <FotoKonteks id={b.foto} />}
       {b.gambar && (
         <CircleSVG
           r={14}

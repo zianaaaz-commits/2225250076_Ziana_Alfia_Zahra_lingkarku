@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useProgres } from '../../app/ProgresContext';
 import CircleSVG from '../../components/CircleSVG';
 import MathText from '../../components/MathText';
+import Perayaan from '../../components/Perayaan';
 import { FASE, LITERASI, type Misi } from '../../content/literasi';
 import LangkahMisi from './LangkahMisi';
 import WiperSVG from './WiperSVG';
@@ -133,10 +134,9 @@ function Isi({ misi }: { misi: Misi }) {
 
       {selesai && (
         <div className="flex flex-col items-center gap-4 py-4 text-center">
-          <p className="text-xl font-bold">Misi selesai! 🎉</p>
-          <p className="text-gray-600">
+          <Perayaan judul="Misi selesai! 🎉">
             Kamu sudah memahami masalah, merumuskannya, menghitung, menafsirkan hasil, dan menjelaskan alasanmu.
-          </p>
+          </Perayaan>
           {berikutnya ? (
             <Link to={`/literasi/${berikutnya.id}`} className="flex min-h-12 w-full items-center justify-center rounded-xl bg-aksi font-semibold text-white">
               Misi berikutnya ▶

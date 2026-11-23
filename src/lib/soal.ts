@@ -1,3 +1,4 @@
+import type { FotoId } from '../content/gambar';
 import {
   jariDariBusur,
   jariDariDiameter,
@@ -48,6 +49,8 @@ export interface Soal {
   kunci: number;
   /** id contoh F4 yang relevan (tombol "Lihat contoh serupa") */
   contohTerkait?: string;
+  /** Foto konteks dunia nyata (mis. pizza) — hanya untuk soal yang konteksnya sesuai. */
+  foto?: FotoId;
 }
 
 const wajib = (nilai: number | undefined, nama: string): number => {

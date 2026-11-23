@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useProgres } from '../../app/ProgresContext';
+import FotoKonteks from '../../components/FotoKonteks';
 import IsianAngka from '../../components/IsianAngka';
+import Perayaan from '../../components/Perayaan';
 import KepalaSoal from '../../components/KepalaSoal';
 import MathText from '../../components/MathText';
 import StepReveal from '../../components/StepReveal';
@@ -24,6 +26,7 @@ function SoalMelengkapi({ id, m, berikutnya }: { id: string; m: Melengkapi; beri
     <div className="flex flex-col gap-4">
       <h2 className="text-xl font-bold">Sekarang kamu coba!</h2>
       <p className="text-gray-600">Lengkapi kotak yang kosong.</p>
+      {m.foto && <FotoKonteks id={m.foto} />}
       <KepalaSoal soal={m.soal} gambar={m.gambar} />
       <ol className="flex flex-col gap-2">
         {m.langkah.map((l, i) => (
@@ -43,7 +46,7 @@ function SoalMelengkapi({ id, m, berikutnya }: { id: string; m: Melengkapi; beri
       </ol>
       {selesai && (
         <div role="status" className="flex flex-col gap-3 rounded-xl border-l-4 border-benar bg-gray-50 p-4">
-          <p className="font-bold">Hebat, semua kotak benar!</p>
+          <Perayaan judul="Hebat, semua kotak benar!" />
           {berikutnya ? (
             <Link to={`/contoh/${berikutnya}`} className="flex min-h-12 items-center justify-center rounded-xl bg-aksi font-semibold text-white">
               Contoh berikutnya ▶
@@ -84,6 +87,7 @@ function Isi({ id }: { id: string }) {
       </div>
       {fase === 'contoh' ? (
         <>
+          {c.foto && <FotoKonteks id={c.foto} />}
           <KepalaSoal soal={c.soal} gambar={c.gambar} />
           <StepReveal
             langkah={c.langkah}

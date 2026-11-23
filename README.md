@@ -37,7 +37,9 @@ Hasil wawancara dengan siswa kelas IX menunjukkan bahwa siswa:
 6. **Soal Cerita**: tandai *Diketahui/Ditanya*, abaikan informasi pengecoh.
 7. **Misi Literasi**: 4 masalah kontekstual: Pahami → Rumuskan → Hitung → Tafsirkan → Jelaskan.
 
-Plus: Kartu Rumus, progres tersimpan, lagu latar orisinal (hanya di menu), mode offline.
+Semua modul disajikan sebagai **Petualangan Negeri Lingkaran**: peta 7 pos yang dipandu maskot
+**Si Bulat** menuju harta karun (Kartu Hasil). Plus: data diri siswa, Kartu Rumus, progres tersimpan,
+foto konteks pizza, lagu latar orisinal (hanya di menu), mode offline.
 
 ## Teknologi & bahasa
 

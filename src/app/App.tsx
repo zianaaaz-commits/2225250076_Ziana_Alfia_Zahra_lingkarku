@@ -7,6 +7,7 @@ import SegeraHadir from './SegeraHadir';
 import { ProgresProvider, useProgres } from './ProgresContext';
 import SelamatDatang from './SelamatDatang';
 import KartuHasil from './KartuHasil';
+import Kredit from './Kredit';
 import { MODUL } from '../content/modul';
 import Prasyarat from '../features/prasyarat/Prasyarat';
 import Konsep from '../features/konsep/Konsep';
@@ -51,6 +52,7 @@ export function Halaman() {
         <Route path="/pengaturan" element={<Pengaturan />} />
         <Route path="/pasang" element={<Pasang />} />
         <Route path="/hasil" element={<KartuHasil />} />
+        <Route path="/kredit" element={<Kredit />} />
         <Route path="*" element={<SegeraHadir judul="Halaman tidak ditemukan" />} />
       </Route>
     </Routes>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useProgres } from '../../app/ProgresContext';
+import Perayaan from '../../components/Perayaan';
 import Tombol from '../../components/Tombol';
 import { BANK_SOAL } from '../../content/bankSoal';
 import { paketSoalAcak } from '../../lib/generator';
@@ -17,12 +18,9 @@ function Hasil({ level, skor, total, ulangAcak }: { level: Level; skor: number; 
   const tautan = 'flex min-h-12 w-full items-center justify-center rounded-xl font-semibold';
   return (
     <div className="flex flex-col items-center gap-4 py-6 text-center">
-      <p className="text-2xl font-bold">
-        Benar {skor} dari {total}
-      </p>
-      <p className="text-gray-600">
+      <Perayaan judul={`Benar ${skor} dari ${total}`}>
         {lulus ? 'Hebat! Kamu sudah menguasai level ini.' : 'Tidak apa-apa. Lihat contohnya lagi, lalu coba soal baru.'}
-      </p>
+      </Perayaan>
       {lulus && level < 3 && (
         <Link to={`/latihan/${level + 1}`} className={`${tautan} bg-aksi text-white`}>
           Lanjut ke Level {level + 1} ▶

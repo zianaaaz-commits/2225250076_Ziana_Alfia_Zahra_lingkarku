@@ -61,6 +61,8 @@ Durasi di bawah adalah perkiraan; sesuaikan dengan jadwal kuliah.
 - [x] Halaman **Pasang Aplikasi** (PWA 1-ketuk, panduan iPhone/laptop, unduh APK, QR)
 - [x] GitHub Actions: uji + GitHub Pages (`web.yml`), APK ke Releases (`apk.yml`)
 - [x] Data diri wajib di layar awal (nama & kelas, hanya di perangkat) + **Kartu Hasil** untuk dibagikan ke guru
+- [x] Tema petualangan (peta pos + harta karun), maskot Si Bulat, foto konteks pizza, halaman Kredit
+- [ ] Lengkapi sumber/lisensi gambar stok di halaman Kredit
 - [ ] Simpan kunci APK ke GitHub Secrets (oleh pemilik repo)
 - [ ] Uji APK di HP Android nyata
 

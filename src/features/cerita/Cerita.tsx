@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import CircleSVG from '../../components/CircleSVG';
+import FotoKonteks from '../../components/FotoKonteks';
+import Perayaan from '../../components/Perayaan';
 import KotakUmpanBalik from '../../components/KotakUmpanBalik';
 import Tombol from '../../components/Tombol';
 import { useProgres } from '../../app/ProgresContext';
@@ -72,6 +74,7 @@ function Isi({ cerita }: { cerita: DataCerita }) {
         </span>
       </div>
 
+      {fase === 'tandai' && cerita.foto && <FotoKonteks id={cerita.foto} />}
       {fase === 'tandai' && <TandaiCerita cerita={cerita} benar={() => setFase('pemandu')} />}
 
       {fase !== 'tandai' && fase !== 'hitung' && fase !== 'selesai' && (
@@ -118,7 +121,7 @@ function Isi({ cerita }: { cerita: DataCerita }) {
 
       {fase === 'selesai' && (
         <div className="flex flex-col items-center gap-4 py-6 text-center">
-          <p className="text-xl font-bold">Soal cerita selesai! 🎉</p>
+          <Perayaan judul="Soal cerita selesai! 🎉">Kamu jago menemukan informasi penting.</Perayaan>
           {berikutnya ? (
             <Link to={`/cerita/${berikutnya.id}`} className={`${tautanUtama} w-full`}>
               Soal cerita berikutnya ▶

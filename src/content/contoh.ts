@@ -2,6 +2,7 @@ import type { Tampil } from '../components/CircleSVG';
 import type { Langkah } from '../components/StepReveal';
 import type { Pi } from '../lib/geometri';
 import { RUMUS_BUSUR, RUMUS_JURING } from '../lib/latex';
+import type { FotoId } from './gambar';
 import type { DataSoal, Ditanya } from '../lib/soal';
 
 // F4 — Contoh soal bertahap + soal melengkapi (docs/04-konten-materi.md §4).
@@ -30,6 +31,7 @@ export interface Isian {
 export interface Melengkapi {
   soal: string;
   gambar?: GambarSoal;
+  foto?: FotoId;
   langkah: (Langkah | Isian)[];
   jawaban: { data: DataSoal; ditanya: Ditanya; nilai: number };
 }
@@ -39,6 +41,7 @@ export interface Contoh {
   judul: string;
   soal: string;
   gambar?: GambarSoal;
+  foto?: FotoId;
   langkah: Langkah[];
   jawaban: { data: DataSoal; ditanya: Ditanya; nilai: number };
   melengkapi: Melengkapi;
@@ -188,6 +191,7 @@ export const CONTOH: Contoh[] = [
     judul: 'Soal cerita: pizza',
     soal: 'Sebuah pizza berdiameter 28 cm dipotong menjadi 8 bagian sama besar. Berapa luas satu potong? (π = 22/7)',
     gambar: { r: 14, alpha: 45, pi: '22/7', tampil: 'juring', nilai: false },
+    foto: 'pizza-8-potong',
     langkah: [
       { label: 'Diketahui', isi: String.raw`$d = 28$ cm → $r = 28 \div 2 = 14$ cm` },
       { label: 'Diketahui', isi: String.raw`8 potong sama besar → $\alpha = 360^\circ \div 8 = 45^\circ$` },
@@ -201,6 +205,7 @@ export const CONTOH: Contoh[] = [
     melengkapi: {
       soal: 'Pizza berdiameter 42 cm dipotong menjadi 6 bagian sama besar. Berapa luas satu potong? (π = 22/7)',
       gambar: { r: 21, alpha: 60, pi: '22/7', tampil: 'juring', nilai: false, teksSudut: '?' },
+      foto: 'pizza-utuh',
       langkah: [
         { label: 'Jari-jari', isi: String.raw`$r = 42 \div 2 = 21$ cm` },
         { label: 'Sudut pusat', sebelum: String.raw`$\alpha = 360^\circ \div 6 =$`, kunci: 60, satuan: '°', petunjuk: '6 potong sama besar: bagi 360° dengan 6.' },

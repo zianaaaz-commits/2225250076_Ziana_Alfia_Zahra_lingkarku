@@ -59,6 +59,7 @@ npm run periksa:python # ekspor konten → Python memeriksa ulang semua kunci (p
 npm run test:python    # unit test alat Python
 npm run lagu           # buat ulang lagu latar (public/audio/lagu-latar.wav)
 npm run qr             # buat ulang kode QR alamat web (perlu: pip install -r python/requirements.txt)
+python python/olah_gambar.py  # olah assets/sumber/*.jpg → public/gambar/*.webp (potong pizza, hapus latar maskot)
 npm run android        # build + salin dist/ ke proyek android/
 npm run android:buka   # seperti di atas, lalu buka Android Studio untuk build APK
 ```
@@ -111,7 +112,11 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
 7. **Contoh dulu, baru latihan** (worked example → completion problem → soal mandiri). (GL01, GL02)
 8. **Umpan balik spesifik kesalahan**, bukan hanya "Benar/Salah". Gunakan `lib/feedback.ts`. (DS02, IL05, GL02)
 9. **Soal cerita** selalu menyediakan alat bantu "tandai yang diketahui & ditanya". (EL05)
-10. **Tanpa elemen dekoratif yang tidak mengajar**: tanpa animasi latar, maskot bergerak, atau iklan. Lagu latar **hanya di layar menu** (`lib/musik.ts` → `HALAMAN_MENU`); jangan memutarnya di layar belajar. (DS03, prinsip koherensi)
+10. **Dekorasi dibatasi** (DS03, prinsip koherensi):
+    - Lagu latar **hanya di layar menu** (`lib/musik.ts` → `HALAMAN_MENU`); jangan memutarnya di layar belajar.
+    - Maskot **Si Bulat** (`components/Maskot.tsx`) **statis, tidak beranimasi**, hanya di layar sambutan, peta petualangan (Beranda), dan layar perayaan (`Perayaan`). Jangan menaruhnya di tengah langkah pengerjaan soal.
+    - Foto konteks (`content/gambar.ts`, `FotoKonteks`) hanya untuk soal yang konteksnya **sama** dengan fotonya (mis. pizza), ditampilkan kecil, dan **tidak menggantikan** diagram berlabel.
+    - Tanpa animasi latar atau iklan.
 11. **Literasi matematika**: masalah kontekstual mengikuti 5 tahap Pahami → Rumuskan → Hitung → Tafsirkan → Jelaskan (lihat [docs/09-literasi-matematika.md](docs/09-literasi-matematika.md)).
 
 ## 6. Aturan Konten Matematika
