@@ -53,6 +53,7 @@ export const CERITA: Cerita[] = [
     ],
     jenis: 'panjang',
     gambar: { r: 7, alpha: 90, pi: '22/7', tampil: 'busur', nilai: false },
+    foto: 'jam',
     soal: { id: 'cerita-jam', level: 3, teks: 'Jarum menit panjangnya 7 cm. Berapa panjang lintasan ujung jarum dalam 15 menit?', data: { r: 7, alpha: 90, pi: '22/7' }, ditanya: 'busur', satuan: 'cm', kunci: 11, contohTerkait: 'C1' },
   },
   {
@@ -64,6 +65,7 @@ export const CERITA: Cerita[] = [
     ],
     jenis: 'luas',
     gambar: { r: 14, alpha: 90, pi: '22/7', tampil: 'juring', nilai: false, satuan: 'm' },
+    foto: 'taman',
     soal: { id: 'cerita-taman', level: 3, teks: 'Taman berbentuk juring, jari-jari 14 m, sudut pusat 90°. Berapa luas taman?', data: { r: 14, alpha: 90, pi: '22/7' }, ditanya: 'juring', satuan: 'm²', kunci: 154, contohTerkait: 'C2' },
   },
   {
@@ -76,6 +78,7 @@ export const CERITA: Cerita[] = [
     ],
     jenis: 'panjang',
     gambar: { r: 14, alpha: 90, pi: '22/7', tampil: 'keduanya', nilai: false, satuan: 'm' },
+    foto: 'pagar',
     soal: { id: 'cerita-pagar', level: 3, teks: 'Taman berbentuk juring (r = 14 m, α = 90°) dipagari sekelilingnya. Berapa panjang pagar?', data: { r: 14, alpha: 90, pi: '22/7' }, ditanya: 'kelilingJuring', satuan: 'm', kunci: 50, contohTerkait: 'C1' },
   },
   {
@@ -87,6 +90,7 @@ export const CERITA: Cerita[] = [
     ],
     jenis: 'luas',
     gambar: { r: 21, alpha: 120, pi: '22/7', tampil: 'juring', nilai: false, satuan: 'm' },
+    foto: 'penyiram',
     soal: { id: 'cerita-penyiram', level: 3, teks: 'Alat penyiram berputar 120° dengan jangkauan 21 m. Berapa luas daerah yang tersiram?', data: { r: 21, alpha: 120, pi: '22/7' }, ditanya: 'juring', satuan: 'm²', kunci: 462, contohTerkait: 'C6' },
   },
   {
@@ -98,6 +102,7 @@ export const CERITA: Cerita[] = [
     ],
     jenis: 'panjang',
     gambar: { r: 30, alpha: 60, pi: '3.14', tampil: 'busur', nilai: false },
+    foto: 'bandul',
     soal: { id: 'cerita-bandul', level: 3, teks: 'Bandul bertali 30 cm berayun membentuk sudut 60°. Berapa panjang lintasan ujung bandul?', data: { r: 30, alpha: 60, pi: '3.14' }, ditanya: 'busur', satuan: 'cm', kunci: 31.4, contohTerkait: 'C1' },
   },
 ];

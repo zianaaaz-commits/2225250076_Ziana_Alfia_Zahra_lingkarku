@@ -25,9 +25,9 @@ export const BANK_SOAL: Soal[] = [
 
   // ---- Level 3: soal cerita ----
   { id: 'L3-01', level: 3, teks: 'Pizza berdiameter 28 cm dipotong menjadi 8 bagian sama besar. Berapa panjang pinggiran satu potong?', data: { d: 28, alpha: 45, pi: '22/7' }, ditanya: 'busur', satuan: 'cm', kunci: 11, contohTerkait: 'C6', foto: 'pizza-8-potong' },
-  { id: 'L3-02', level: 3, teks: 'Jarum menit sebuah jam panjangnya 7 cm. Berapa panjang lintasan ujung jarum dalam 15 menit?', data: { r: 7, alpha: 90, pi: '22/7' }, ditanya: 'busur', satuan: 'cm', kunci: 11, contohTerkait: 'C6' },
-  { id: 'L3-03', level: 3, teks: 'Sebuah taman berbentuk juring dengan jari-jari 14 m dan sudut pusat 90°. Berapa luas taman?', data: { r: 14, alpha: 90, pi: '22/7' }, ditanya: 'juring', satuan: 'm²', kunci: 154, contohTerkait: 'C6' },
-  { id: 'L3-04', level: 3, teks: 'Taman berbentuk juring (jari-jari 14 m, sudut 90°) akan dipagari sekelilingnya. Berapa panjang pagar?', data: { r: 14, alpha: 90, pi: '22/7' }, ditanya: 'kelilingJuring', satuan: 'm', kunci: 50, contohTerkait: 'C6' },
-  { id: 'L3-05', level: 3, teks: 'Alat penyiram berputar 120° dengan jangkauan 21 m. Berapa luas daerah yang tersiram?', data: { r: 21, alpha: 120, pi: '22/7' }, ditanya: 'juring', satuan: 'm²', kunci: 462, contohTerkait: 'C6' },
-  { id: 'L3-06', level: 3, teks: 'Bandul bertali 30 cm berayun membentuk sudut 60°. Berapa panjang lintasan ujung bandul? (π = 3,14)', data: { r: 30, alpha: 60, pi: '3.14' }, ditanya: 'busur', satuan: 'cm', kunci: 31.4, contohTerkait: 'C6' },
+  { id: 'L3-02', level: 3, teks: 'Jarum menit sebuah jam panjangnya 7 cm. Berapa panjang lintasan ujung jarum dalam 15 menit?', data: { r: 7, alpha: 90, pi: '22/7' }, ditanya: 'busur', satuan: 'cm', kunci: 11, contohTerkait: 'C6', foto: 'jam' },
+  { id: 'L3-03', level: 3, teks: 'Sebuah taman berbentuk juring dengan jari-jari 14 m dan sudut pusat 90°. Berapa luas taman?', data: { r: 14, alpha: 90, pi: '22/7' }, ditanya: 'juring', satuan: 'm²', kunci: 154, contohTerkait: 'C6', foto: 'taman' },
+  { id: 'L3-04', level: 3, teks: 'Taman berbentuk juring (jari-jari 14 m, sudut 90°) akan dipagari sekelilingnya. Berapa panjang pagar?', data: { r: 14, alpha: 90, pi: '22/7' }, ditanya: 'kelilingJuring', satuan: 'm', kunci: 50, contohTerkait: 'C6', foto: 'pagar' },
+  { id: 'L3-05', level: 3, teks: 'Alat penyiram berputar 120° dengan jangkauan 21 m. Berapa luas daerah yang tersiram?', data: { r: 21, alpha: 120, pi: '22/7' }, ditanya: 'juring', satuan: 'm²', kunci: 462, contohTerkait: 'C6', foto: 'penyiram' },
+  { id: 'L3-06', level: 3, teks: 'Bandul bertali 30 cm berayun membentuk sudut 60°. Berapa panjang lintasan ujung bandul? (π = 3,14)', data: { r: 30, alpha: 60, pi: '3.14' }, ditanya: 'busur', satuan: 'cm', kunci: 31.4, contohTerkait: 'C6', foto: 'bandul' },
 ];

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" rx="24" fill="#BBF7D0"/>
+  <g stroke="#86EFAC" stroke-width="3" stroke-linecap="round">
+    <line x1="20" y1="30" x2="24" y2="22"/><line x1="290" y1="40" x2="294" y2="32"/><line x1="30" y1="170" x2="34" y2="162"/>
+    <line x1="280" y1="160" x2="284" y2="152"/><line x1="250" y1="25" x2="254" y2="17"/><line x1="60" y1="20" x2="64" y2="12"/>
+  </g>
+  <!-- daerah tersiram = juring 120° (biru) -->
+  <path d="M160 175 L281.2 105 A140 140 0 0 0 38.8 105 Z" fill="#38BDF8" fill-opacity="0.35" stroke="#0284C7" stroke-width="2" stroke-dasharray="6 5"/>
+  <g fill="none" stroke="#0EA5E9" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="3 7">
+    <path d="M160 168 Q200 110 260 100"/><path d="M160 168 Q160 90 160 50"/><path d="M160 168 Q120 110 60 100"/>
+  </g>
+  <g fill="#0EA5E9">
+    <ellipse cx="230" cy="92" rx="3" ry="4.5"/><ellipse cx="200" cy="70" rx="3" ry="4.5"/><ellipse cx="160" cy="60" rx="3" ry="4.5"/>
+    <ellipse cx="120" cy="72" rx="3" ry="4.5"/><ellipse cx="90" cy="92" rx="3" ry="4.5"/><ellipse cx="185" cy="120" rx="3" ry="4.5"/>
+    <ellipse cx="135" cy="120" rx="3" ry="4.5"/><ellipse cx="250" cy="110" rx="3" ry="4.5"/><ellipse cx="70" cy="110" rx="3" ry="4.5"/>
+  </g>
+  <rect x="150" y="166" width="20" height="18" rx="4" fill="#475569"/>
+  <circle cx="160" cy="166" r="8" fill="#94A3B8"/>
+  <text x="160" y="140" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#7E22CE" text-anchor="middle">120°</text>
+</svg>

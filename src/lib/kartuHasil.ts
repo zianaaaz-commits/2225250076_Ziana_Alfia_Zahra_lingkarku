@@ -7,6 +7,8 @@ export interface DataKartu {
   tanggal: Date;
   modul: { judul: string; selesai: boolean }[];
   skor: Partial<Record<Level, number>>;
+  /** Gelar petualang, mis. "🏹 Pemburu Busur". */
+  gelar?: string;
 }
 
 export const formatTanggal = (d: Date): string =>
@@ -23,6 +25,7 @@ export function teksKartuHasil(k: DataKartu): string {
     `Nama  : ${k.nama}`,
     `Kelas : ${k.kelas}`,
     `Tanggal: ${formatTanggal(k.tanggal)}`,
+    ...(k.gelar ? [`Gelar : ${k.gelar}`] : []),
     '',
     `Langkah selesai: ${selesai} dari ${k.modul.length}`,
     ...k.modul.map((m) => `${m.selesai ? '✅' : '⬜'} ${m.judul}`),

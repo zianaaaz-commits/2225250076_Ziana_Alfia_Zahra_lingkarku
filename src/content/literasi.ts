@@ -1,5 +1,6 @@
 import type { DataSoal, Ditanya } from '../lib/soal';
 import type { GambarSoal } from './contoh';
+import type { FotoId } from './gambar';
 
 // Misi Literasi Matematika (docs/09-literasi-matematika.md).
 // Mengikuti proses literasi matematika PISA 2022 / AKM Numerasi:
@@ -40,6 +41,8 @@ export interface Misi {
   cerita: string;
   info: { label: string; nilai: string }[];
   gambar?: GambarSoal;
+  /** Ilustrasi konteks dunia nyata. */
+  foto?: FotoId;
   ilustrasi?: 'wiper';
   langkah: LangkahMisi[];
 }
@@ -57,6 +60,7 @@ export const LITERASI: Misi[] = [
       { label: 'Keinginan adik', nilai: '≥ 70 cm² per potong' },
     ],
     gambar: { r: 14, alpha: 45, pi: '22/7', tampil: 'juring', nilai: false, label: false },
+    foto: 'kue',
     langkah: [
       {
         jenis: 'pilihan', fase: 'pahami',
@@ -120,6 +124,7 @@ export const LITERASI: Misi[] = [
       { label: 'Dana OSIS', nilai: 'Rp2.000.000' },
     ],
     gambar: { r: 14, alpha: 90, pi: '22/7', tampil: 'keduanya', nilai: false, satuan: 'm' },
+    foto: 'pagar',
     langkah: [
       {
         jenis: 'pilihan', fase: 'rumuskan',
@@ -179,6 +184,7 @@ export const LITERASI: Misi[] = [
       { label: 'Sudut sapuan', nilai: '120°' },
     ],
     ilustrasi: 'wiper',
+    foto: 'wiper',
     langkah: [
       {
         jenis: 'pilihan', fase: 'rumuskan',
@@ -237,6 +243,7 @@ export const LITERASI: Misi[] = [
       { label: 'Satu putaran penuh', nilai: '6 menit' },
     ],
     gambar: { r: 21, alpha: 30, pi: '22/7', tampil: 'busur', nilai: false, label: false, satuan: 'm' },
+    foto: 'bianglala',
     langkah: [
       {
         jenis: 'pilihan', fase: 'rumuskan',

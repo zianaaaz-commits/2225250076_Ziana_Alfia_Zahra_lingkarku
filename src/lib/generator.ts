@@ -123,6 +123,7 @@ function level3(rng: Rng): Draf {
         ditanya: 'busur',
         satuan: 'cm',
         contohTerkait: 'C6',
+        foto: 'jam',
       };
     }
     case 'taman':
@@ -138,6 +139,7 @@ function level3(rng: Rng): Draf {
         ditanya: pagar ? 'kelilingJuring' : 'juring',
         satuan: pagar ? 'm' : 'm²',
         contohTerkait: 'C6',
+        foto: pagar ? 'pagar' : 'taman',
       };
     }
     case 'penyiram': {
@@ -149,6 +151,7 @@ function level3(rng: Rng): Draf {
         ditanya: 'juring',
         satuan: 'm²',
         contohTerkait: 'C6',
+        foto: 'penyiram',
       };
     }
     case 'bandul': {
@@ -160,6 +163,7 @@ function level3(rng: Rng): Draf {
         ditanya: 'busur',
         satuan: 'cm',
         contohTerkait: 'C6',
+        foto: 'bandul',
       };
     }
   }

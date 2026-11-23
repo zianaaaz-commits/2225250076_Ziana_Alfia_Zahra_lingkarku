@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" rx="24" fill="#E7E5E4"/>
+  <g fill="#D6D3D1"><rect x="200" y="20" width="36" height="20" rx="3"/><rect x="244" y="20" width="36" height="20" rx="3"/><rect x="200" y="48" width="36" height="20" rx="3"/><rect x="244" y="48" width="36" height="20" rx="3"/></g>
+  <!-- taman berbentuk juring (sudut 90°) dilihat dari atas -->
+  <path d="M40 180 L180 180 A140 140 0 0 0 40 40 Z" fill="#86EFAC" stroke="#16A34A" stroke-width="3"/>
+  <g fill="none" stroke="#4ADE80" stroke-width="6" opacity="0.7">
+    <path d="M90 180 A50 50 0 0 0 40 130"/><path d="M130 180 A90 90 0 0 0 40 90"/><path d="M165 180 A125 125 0 0 0 40 55"/>
+  </g>
+  <g>
+    <circle cx="80" cy="150" r="6" fill="#F472B6"/><circle cx="80" cy="150" r="2.5" fill="#FDE047"/>
+    <circle cx="125" cy="120" r="6" fill="#FB923C"/><circle cx="125" cy="120" r="2.5" fill="#FDE047"/>
+    <circle cx="70" cy="95" r="6" fill="#A78BFA"/><circle cx="70" cy="95" r="2.5" fill="#FDE047"/>
+    <circle cx="145" cy="160" r="6" fill="#F87171"/><circle cx="145" cy="160" r="2.5" fill="#FDE047"/>
+    <circle cx="100" cy="72" r="6" fill="#F472B6"/><circle cx="100" cy="72" r="2.5" fill="#FDE047"/>
+  </g>
+  <circle cx="40" cy="180" r="5" fill="#1F2937"/>
+  <rect x="246" y="112" width="12" height="40" rx="4" fill="#92400E"/>
+  <circle cx="252" cy="100" r="30" fill="#22C55E"/><circle cx="234" cy="112" r="18" fill="#16A34A"/><circle cx="272" cy="110" r="20" fill="#16A34A"/>
+  <circle cx="290" cy="170" r="16" fill="#4ADE80"/><circle cx="270" cy="176" r="12" fill="#22C55E"/>
+</svg>

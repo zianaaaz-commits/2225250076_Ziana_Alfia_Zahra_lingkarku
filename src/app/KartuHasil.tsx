@@ -3,6 +3,7 @@ import Tombol from '../components/Tombol';
 import { MODUL } from '../content/modul';
 import { bagikanTeks } from '../lib/bagikan';
 import { formatTanggal, persen, teksKartuHasil } from '../lib/kartuHasil';
+import { gelarPetualang } from '../lib/petualangan';
 import { lulusLevel } from '../lib/progress';
 import { modulSelesai, useProgres } from './ProgresContext';
 
@@ -22,7 +23,9 @@ export default function KartuHasil() {
   const siswa = progres.siswa;
   if (!siswa) return null;
 
-  const teks = teksKartuHasil({ nama: siswa.nama, kelas: siswa.kelas, tanggal, modul, skor: progres.skor });
+  const g = gelarPetualang(modul.filter((m) => m.selesai).length).sekarang;
+  const gelar = `${g.ikon} ${g.nama}`;
+  const teks = teksKartuHasil({ nama: siswa.nama, kelas: siswa.kelas, tanggal, modul, skor: progres.skor, gelar });
 
   return (
     <section className="flex flex-col gap-4">
@@ -37,6 +40,8 @@ export default function KartuHasil() {
           <dd className="font-bold">{siswa.kelas}</dd>
           <dt className="text-gray-600">Tanggal</dt>
           <dd>{formatTanggal(tanggal)}</dd>
+          <dt className="text-gray-600">Gelar</dt>
+          <dd className="font-semibold">{gelar}</dd>
         </dl>
 
         <div>

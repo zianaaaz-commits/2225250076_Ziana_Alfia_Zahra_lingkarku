@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useProgres } from '../../app/ProgresContext';
 import CircleSVG from '../../components/CircleSVG';
+import FotoKonteks from '../../components/FotoKonteks';
 import MathText from '../../components/MathText';
 import Perayaan from '../../components/Perayaan';
 import { FASE, LITERASI, type Misi } from '../../content/literasi';
@@ -67,6 +68,7 @@ function PenandaFase({ aktif }: { aktif: number }) {
 function KartuCerita({ misi }: { misi: Misi }) {
   return (
     <div className="flex flex-col gap-3 rounded-xl border border-gray-200 p-3">
+      {misi.foto && <FotoKonteks id={misi.foto} />}
       <MathText teks={misi.cerita} />
       <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1 rounded-lg bg-gray-50 p-2 text-sm">
         {misi.info.map((x) => (

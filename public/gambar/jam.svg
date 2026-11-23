@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" rx="24" fill="#FEF3C7"/>
+  <rect x="0" y="150" width="320" height="50" fill="#FDE68A" opacity="0.6"/>
+  <circle cx="160" cy="100" r="84" fill="#7C2D12"/>
+  <circle cx="160" cy="100" r="76" fill="#FFFBEB"/>
+  <g stroke="#78350F" stroke-width="3" stroke-linecap="round">
+    <line x1="160" y1="30" x2="160" y2="40"/><line x1="195" y1="39.4" x2="191" y2="46.3"/>
+    <line x1="220.6" y1="65" x2="213.7" y2="69"/><line x1="230" y1="100" x2="220" y2="100"/>
+    <line x1="220.6" y1="135" x2="213.7" y2="131"/><line x1="195" y1="160.6" x2="191" y2="153.7"/>
+    <line x1="160" y1="170" x2="160" y2="160"/><line x1="125" y1="160.6" x2="129" y2="153.7"/>
+    <line x1="99.4" y1="135" x2="106.3" y2="131"/><line x1="90" y1="100" x2="100" y2="100"/>
+    <line x1="99.4" y1="65" x2="106.3" y2="69"/><line x1="125" y1="39.4" x2="129" y2="46.3"/>
+  </g>
+  <!-- lintasan ujung jarum menit selama 15 menit = busur (oranye) -->
+  <path d="M160 32 A68 68 0 0 1 228 100" fill="none" stroke="#F97316" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 8"/>
+  <polygon points="221,90 235,90 228,104" fill="#F97316"/>
+  <line x1="160" y1="100" x2="160" y2="44" stroke="#1F2937" stroke-width="4" stroke-linecap="round" opacity="0.3"/>
+  <line x1="160" y1="100" x2="216" y2="100" stroke="#1F2937" stroke-width="5" stroke-linecap="round"/>
+  <line x1="160" y1="100" x2="181" y2="113" stroke="#1F2937" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="160" cy="100" r="6" fill="#DC2626"/>
+  <!-- angka digambar setelah jarum agar tetap terbaca -->
+  <g font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#78350F" text-anchor="middle" stroke="#FFFBEB" stroke-width="4" paint-order="stroke">
+    <text x="160" y="60">12</text><text x="203" y="92">3</text><text x="160" y="153">6</text><text x="114" y="105">9</text>
+  </g>
+  <text x="252" y="48" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#C2410C" text-anchor="middle">15 menit</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 200">
+  <rect width="320" height="200" rx="24" fill="#FCE7F3"/>
+  <g>
+    <rect x="30" y="30" width="8" height="4" rx="2" fill="#60A5FA" transform="rotate(30 34 32)"/>
+    <rect x="270" y="40" width="8" height="4" rx="2" fill="#FBBF24" transform="rotate(-20 274 42)"/>
+    <rect x="40" y="160" width="8" height="4" rx="2" fill="#34D399" transform="rotate(50 44 162)"/>
+    <rect x="275" y="150" width="8" height="4" rx="2" fill="#F87171" transform="rotate(15 279 152)"/>
+    <circle cx="60" cy="70" r="3" fill="#A78BFA"/><circle cx="262" cy="100" r="3" fill="#60A5FA"/><circle cx="58" cy="128" r="3" fill="#FBBF24"/>
+  </g>
+  <!-- kue dilihat dari atas, dipotong 8 sama besar -->
+  <circle cx="160" cy="100" r="90" fill="#F3F4F6" stroke="#D1D5DB" stroke-width="2"/>
+  <circle cx="160" cy="100" r="76" fill="#FBCFE8" stroke="#EC4899" stroke-width="4"/>
+  <circle cx="160" cy="100" r="66" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="2 6"/>
+  <g stroke="#BE185D" stroke-width="2">
+    <line x1="160" y1="100" x2="236" y2="100"/><line x1="160" y1="100" x2="213.7" y2="46.3"/>
+    <line x1="160" y1="100" x2="160" y2="24"/><line x1="160" y1="100" x2="106.3" y2="46.3"/>
+    <line x1="160" y1="100" x2="84" y2="100"/><line x1="160" y1="100" x2="106.3" y2="153.7"/>
+    <line x1="160" y1="100" x2="160" y2="176"/><line x1="160" y1="100" x2="213.7" y2="153.7"/>
+  </g>
+  <g>
+    <circle cx="206.2" cy="80.9" r="5.5" fill="#60A5FA"/><circle cx="179.1" cy="53.8" r="5.5" fill="#34D399"/>
+    <circle cx="140.9" cy="53.8" r="5.5" fill="#FBBF24"/><circle cx="113.8" cy="80.9" r="5.5" fill="#A78BFA"/>
+    <circle cx="113.8" cy="119.1" r="5.5" fill="#60A5FA"/><circle cx="140.9" cy="146.2" r="5.5" fill="#34D399"/>
+    <circle cx="179.1" cy="146.2" r="5.5" fill="#FBBF24"/><circle cx="206.2" cy="119.1" r="5.5" fill="#A78BFA"/>
+  </g>
+  <g fill="#F59E0B">
+    <circle cx="206.2" cy="80.9" r="2.2"/><circle cx="179.1" cy="53.8" r="2.2"/><circle cx="140.9" cy="53.8" r="2.2"/><circle cx="113.8" cy="80.9" r="2.2"/>
+    <circle cx="113.8" cy="119.1" r="2.2"/><circle cx="140.9" cy="146.2" r="2.2"/><circle cx="179.1" cy="146.2" r="2.2"/><circle cx="206.2" cy="119.1" r="2.2"/>
+  </g>
+  <circle cx="160" cy="100" r="11" fill="#EF4444"/><path d="M155 91 Q160 86 165 91" fill="#22C55E"/>
+</svg>

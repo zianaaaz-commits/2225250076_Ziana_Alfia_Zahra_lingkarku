@@ -9,7 +9,7 @@ it('Beranda menampilkan semua modul berurutan + tautan pasang aplikasi', () => {
       <Beranda />
     </MemoryRouter>,
   );
-  const tautan = within(screen.getByRole('list')).getAllByRole('link');
+  const tautan = within(screen.getByRole('list', { name: 'Peta petualangan' })).getAllByRole('link');
   expect(tautan).toHaveLength(MODUL.length);
   MODUL.forEach((m, i) => expect(tautan[i]).toHaveTextContent(m.judul));
   expect(screen.getByRole('link', { name: /Pasang LingkarKu/ })).toHaveAttribute('href', '/pasang');

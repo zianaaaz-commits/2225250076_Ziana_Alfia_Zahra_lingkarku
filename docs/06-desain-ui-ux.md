@@ -51,6 +51,13 @@ Selain warna, gunakan juga **bentuk/ikon** (garis vs daerah) agar ramah buta war
 - **Foto konteks pizza** hanya pada soal berkonteks pizza (contoh C6, soal cerita pizza, latihan L3-01,
   soal acak pizza, permainan Busur/Juring, layar konsep), ukuran kecil (maks. 160 px), dan selalu
   didampingi diagram berlabel.
+- **Ilustrasi konteks buatan sendiri (SVG)**: jam, taman, pagar, penyiram, bandul, kue, wiper, bianglala
+  (`public/gambar/*.svg`). Bagian matematisnya disorot dengan kode warna: lintasan/busur oranye, daerah/juring
+  biru, sudut ungu. Tes memastikan setiap gambar hanya dipakai pada soal yang memuat kata kuncinya.
+- **Peta lebih seru (23 Nov 2026):** gelar petualang (🌱 Pemula → 🧭 Penjelajah Muda → 🏹 Pemburu Busur →
+  🛡️ Ksatria Juring → 👑 Master Negeri Lingkaran), koleksi 7 lencana, pemandangan (awan, pohon, bendera
+  mulai), dan peti harta karun yang terkunci 🔒 hingga semua pos selesai lalu terbuka 🎁. Gelar ikut tercetak
+  di Kartu Hasil. Semua hiasan hanya di Beranda (layar menu), statis, tanpa animasi.
 - Sumber gambar: `assets/sumber/` → diolah `python/olah_gambar.py` → `public/gambar/*.webp`.
   **Lengkapi lisensi/kredit** di `src/content/gambar.ts` (halaman Kredit) sebelum publikasi luas.
 
