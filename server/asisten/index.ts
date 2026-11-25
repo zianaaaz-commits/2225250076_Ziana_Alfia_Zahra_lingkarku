@@ -5,7 +5,13 @@
 // Penyedia AI dapat dipilih (semua memakai format OpenAI): deepseek (berbayar murah),
 // openrouter (ada model gratis), gemini (Google AI Studio, ada kuota gratis).
 // Panduan pemasangan: server/asisten/README.md
-import { jagaJawaban, susunPesanModel, tentukanFase, validasiPermintaan } from '../../src/lib/asisten/pedagogi';
+import {
+  jagaJawaban,
+  rapikanBalasan,
+  susunPesanModel,
+  tentukanFase,
+  validasiPermintaan,
+} from '../../src/lib/asisten/pedagogi';
 import type { JawabanAsisten } from '../../src/lib/asisten/tipe';
 
 export interface Env {
@@ -64,10 +70,12 @@ export function sesuaikanPesan(pesan: PesanModel[], model: string): PesanModel[]
   );
 }
 
-export function pilihPenyedia(env: Env): Penyedia & { nama: string; model: string; kunci: string } {
+export function pilihPenyedia(env: Env): Penyedia & { nama: string; model: string; daftarModel: string[]; kunci: string } {
   const nama = env.PENYEDIA && PENYEDIA[env.PENYEDIA] ? env.PENYEDIA : 'deepseek';
   const p = PENYEDIA[nama];
-  return { ...p, nama, model: env.MODEL || p.modelBawaan, kunci: env.API_KEY || env.DEEPSEEK_API_KEY || '' };
+  // MODEL boleh berisi beberapa model dipisah koma: model pertama dicoba dulu, sisanya cadangan.
+  const daftarModel = (env.MODEL || p.modelBawaan).split(',').map((m) => m.trim()).filter(Boolean);
+  return { ...p, nama, model: daftarModel[0], daftarModel, kunci: env.API_KEY || env.DEEPSEEK_API_KEY || '' };
 }
 
 const ASAL_BAWAAN = [
@@ -141,36 +149,55 @@ export default {
     if (!v.ok) return galat('tidak-valid', v.galat, 400, asal);
     const p = v.nilai;
 
-    let respons: Response;
-    try {
-      respons = await fetch(ai.url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ai.kunci}`, ...(ai.header ?? {}) },
-        body: JSON.stringify({
-          model: ai.model,
-          messages: sesuaikanPesan(susunPesanModel(p), ai.model),
-          temperature: 0.5,
-          max_tokens: 400,
-          stream: false,
-          ...(ai.ekstra ?? {}), // deepseek: thinking dimatikan agar cepat & hemat
-        }),
-      });
-    } catch {
+    // Coba model satu per satu: bila model gratis sedang penuh (429) atau galat server (5xx),
+    // lanjut ke model cadangan berikutnya.
+    const pesanModel = susunPesanModel(p);
+    let statusTerakhir = 0;
+    let isi: string | undefined;
+    for (const model of ai.daftarModel) {
+      let respons: Response;
+      try {
+        respons = await fetch(ai.url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ai.kunci}`, ...(ai.header ?? {}) },
+          body: JSON.stringify({
+            model,
+            messages: sesuaikanPesan(pesanModel, model),
+            temperature: 0.5,
+            max_tokens: 400,
+            stream: false,
+            ...(ai.ekstra ?? {}), // deepseek: thinking dimatikan agar cepat & hemat
+          }),
+        });
+      } catch {
+        statusTerakhir = 502;
+        continue;
+      }
+      if (!respons.ok) {
+        // Dicatat untuk pemeliharaan (lihat: npx wrangler tail). Tidak memuat API key.
+        const detail = await respons.text().catch(() => '');
+        console.error(`AI ${ai.nama}/${model} → HTTP ${respons.status}: ${detail.slice(0, 300)}`);
+        statusTerakhir = respons.status;
+        if (respons.status === 429 || respons.status >= 500) continue; // coba model cadangan
+        break; // 401/402/400: model lain tidak akan menolong
+      }
+      const data = (await respons.json().catch(() => null)) as { choices?: { message?: { content?: string | null } }[] } | null;
+      isi = data?.choices?.[0]?.message?.content?.trim() || undefined;
+      if (isi) {
+        console.log(`AI ${ai.nama}/${model} → OK`);
+        break;
+      }
+      statusTerakhir = 502;
+    }
+
+    if (!isi) {
+      if (statusTerakhir === 402) return galat('saldo-habis', 'Kuota Asisten Belajar habis. Beri tahu gurumu, ya.', 503, asal);
+      if (statusTerakhir === 429) return galat('terlalu-sering', 'Kak Bulat sedang ramai. Tunggu sebentar lalu coba lagi.', 429, asal);
+      if (statusTerakhir === 401) return galat('belum-diatur', 'API key server tidak valid.', 500, asal);
       return galat('ai-gagal', 'Kak Bulat sedang tidak bisa dihubungi. Coba lagi nanti.', 502, asal);
     }
 
-    if (!respons.ok) {
-      if (respons.status === 402) return galat('saldo-habis', 'Kuota Asisten Belajar habis. Beri tahu gurumu, ya.', 503, asal);
-      if (respons.status === 429) return galat('terlalu-sering', 'Kak Bulat sedang ramai. Tunggu sebentar lalu coba lagi.', 429, asal);
-      if (respons.status === 401) return galat('belum-diatur', 'API key server tidak valid.', 500, asal);
-      return galat('ai-gagal', 'Kak Bulat sedang tidak bisa dihubungi. Coba lagi nanti.', 502, asal);
-    }
-
-    const data = (await respons.json().catch(() => null)) as { choices?: { message?: { content?: string | null } }[] } | null;
-    const isi = data?.choices?.[0]?.message?.content?.trim();
-    if (!isi) return galat('ai-gagal', 'Kak Bulat belum bisa menjawab. Coba tanyakan dengan kalimat lain.', 502, asal);
-
-    const jaga = jagaJawaban(isi, p.kunci, p.konteks);
+    const jaga = jagaJawaban(rapikanBalasan(isi), p.kunci, p.konteks);
     const hasil: JawabanAsisten = {
       balasan: jaga.teks,
       fase: tentukanFase(p.konteks, p.tingkatBantuan),

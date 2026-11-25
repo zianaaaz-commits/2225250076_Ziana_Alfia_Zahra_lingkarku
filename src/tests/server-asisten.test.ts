@@ -136,6 +136,38 @@ describe('server Asisten Belajar (Cloudflare Worker)', () => {
     expect(JSON.parse(opsi.body).model).toBe('gemini-uji');
   });
 
+  it('model gratis penuh (429) → otomatis mencoba model cadangan', async () => {
+    const f = vi
+      .fn()
+      .mockResolvedValueOnce(new Response('{"error":{"message":"rate-limited upstream"}}', { status: 429 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ choices: [{ message: { content: 'Apa yang ditanya?' } }] }), { status: 200 }));
+    vi.stubGlobal('fetch', f);
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    vi.spyOn(console, 'log').mockImplementation(() => {});
+    const r = await kirim(badanSah, ASAL, { PENYEDIA: 'openrouter', API_KEY: 'k', MODEL: 'model-a:free, model-b:free' });
+    expect(r.status).toBe(200);
+    expect(f).toHaveBeenCalledTimes(2);
+    expect(JSON.parse(f.mock.calls[0][1].body).model).toBe('model-a:free');
+    expect(JSON.parse(f.mock.calls[1][1].body).model).toBe('model-b:free');
+  });
+
+  it('semua model penuh → pesan "sedang ramai"', async () => {
+    const f = vi.fn().mockImplementation(async () => new Response('{}', { status: 429 }));
+    vi.stubGlobal('fetch', f);
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    const r = await kirim(badanSah, ASAL, { PENYEDIA: 'openrouter', API_KEY: 'k', MODEL: 'a,b,c' });
+    expect(r.status).toBe(429);
+    expect(f).toHaveBeenCalledTimes(3);
+  });
+
+  it('API key salah (401) → tidak mencoba model lain', async () => {
+    const f = vi.fn().mockImplementation(async () => new Response('{}', { status: 401 }));
+    vi.stubGlobal('fetch', f);
+    vi.spyOn(console, 'error').mockImplementation(() => {});
+    expect((await kirim(badanSah, ASAL, { PENYEDIA: 'openrouter', API_KEY: 'k', MODEL: 'a,b' })).status).toBe(500);
+    expect(f).toHaveBeenCalledTimes(1);
+  });
+
   it('penyedia tidak dikenal → kembali ke deepseek', () => {
     expect(pilihPenyedia({ PENYEDIA: 'asal', API_KEY: 'k' })).toMatchObject({ nama: 'deepseek', model: 'deepseek-flash', kunci: 'k' });
   });

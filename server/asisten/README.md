@@ -10,8 +10,10 @@ Yang dilakukan server (`index.ts`):
 4. Memanggil DeepSeek (`deepseek-flash`, mode *thinking* dimatikan, maks. 400 token).
 5. Menyembunyikan jawaban akhir bila model sempat menuliskannya.
 
-> **Pengaturan saat ini:** `PENYEDIA = "openrouter"`, `MODEL = "google/gemma-4-31b-it:free"` (gratis,
-> 50 pesan/hari). Per 25 Nov 2026 tidak ada model DeepSeek gratis di OpenRouter; model DeepSeek termurah di
+> **Pengaturan saat ini (aktif di https://lingkarku-asisten.asisten.workers.dev):** `PENYEDIA = "openrouter"`,
+> `MODEL` berisi daftar model gratis dipisah koma (Gemma 4 31B → Gemma 4 26B → Nemotron → ERNIE → openrouter/free).
+> Bila model pertama sedang penuh (*rate-limited upstream*), server otomatis mencoba model berikutnya.
+> Batas OpenRouter gratis: 50 pesan/hari per akun. Per 25 Nov 2026 tidak ada model DeepSeek gratis di OpenRouter; model DeepSeek termurah di
 > sana adalah `~deepseek/deepseek-flash-latest` (berbayar). Gemma tidak mengenal pesan "system", jadi server
 > otomatis menggabungkan instruksi pedagogis ke pesan pertama (`sesuaikanPesan`).
 

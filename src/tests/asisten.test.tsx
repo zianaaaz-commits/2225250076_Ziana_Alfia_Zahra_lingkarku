@@ -10,6 +10,7 @@ import {
   FASE_RMT,
   jagaJawaban,
   PESAN_PENJAGA,
+  rapikanBalasan,
   susunPesanModel,
   tentukanFase,
   validasiPermintaan,
@@ -105,6 +106,19 @@ describe('validasi permintaan', () => {
     ['pesan terakhir dari asisten', { ...sah, pesan: [{ peran: 'siswa', isi: 'a' }, { peran: 'asisten', isi: 'b' }] }],
     ['terlalu banyak pesan', { ...sah, pesan: Array.from({ length: 17 }, () => ({ peran: 'siswa', isi: 'a' })) }],
   ])('menolak: %s', (_n, badan) => expect(validasiPermintaan(badan).ok).toBe(false));
+});
+
+describe('perapian balasan', () => {
+  it('balasan yang terulang dua kali disatukan', () => {
+    const a = 'Kamu menghitung **luas** juring, bukan **panjang** busur. Rumus mana yang pakai $2\\pi r$?';
+    expect(rapikanBalasan(a + a)).toBe(a);
+    expect(rapikanBalasan(`${a}\n\n${a}`)).toBe(a);
+  });
+  it('balasan normal tidak berubah', () => {
+    const t = 'Coba sebutkan yang diketahui. Lalu sebutkan yang ditanya.';
+    expect(rapikanBalasan(`  ${t} `)).toBe(t);
+    expect(rapikanBalasan('Ya ya')).toBe('Ya ya');
+  });
 });
 
 describe('penjaga jawaban akhir', () => {

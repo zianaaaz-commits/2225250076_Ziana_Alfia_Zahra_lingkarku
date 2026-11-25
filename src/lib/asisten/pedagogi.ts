@@ -224,6 +224,23 @@ export function susunPesanModel(p: PermintaanAsisten): { role: 'system' | 'user'
   ];
 }
 
+// ---------------------------------------------------------------- perapian balasan
+
+/**
+ * Sebagian model gratis kadang mengulang seluruh balasannya dua kali ("A A").
+ * Bila balasan persis berupa pengulangan, ambil satu salinan saja (mengurangi beban ekstrinsik).
+ */
+export function rapikanBalasan(teks: string): string {
+  const t = teks.trim();
+  for (let i = Math.floor(t.length / 2) - 3; i <= Math.ceil(t.length / 2) + 3; i++) {
+    if (i <= 10 || i >= t.length) continue;
+    const a = t.slice(0, i).trim();
+    const b = t.slice(i).trim();
+    if (a === b) return a;
+  }
+  return t;
+}
+
 // ---------------------------------------------------------------- penjaga jawaban akhir
 
 export const PESAN_PENJAGA = 'Kak Bulat tidak memberi jawaban akhir — coba hitung bagian terakhirnya sendiri, ya! 💪';

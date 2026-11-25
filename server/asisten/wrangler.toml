@@ -7,10 +7,12 @@ compatibility_date = "2025-09-01"
 [vars]
 # Penyedia AI: "deepseek" (berbayar murah), "openrouter" (ada model gratis), "gemini" (Google, ada kuota gratis)
 PENYEDIA = "openrouter"
-# Model gratis Gemma 4 31B (OpenRouter, 50 pesan/hari). Untuk beralih ke DeepSeek:
+# Model gratis OpenRouter (50 pesan/hari). Beberapa model dipisah koma: yang pertama dicoba dulu,
+# bila sedang penuh (429) server otomatis mencoba model berikutnya.
+# Untuk beralih ke DeepSeek:
 #   - via OpenRouter (berbayar murah): MODEL = "~deepseek/deepseek-flash-latest"
 #   - DeepSeek resmi: PENYEDIA = "deepseek", MODEL = "" (pakai API key DeepSeek)
-MODEL = "google/gemma-4-31b-it:free"
+MODEL = "google/gemma-4-31b-it:free,google/gemma-4-26b-a4b-it:free,nvidia/nemotron-3-ultra-550b-a55b:free,baidu/ernie-5.5-flash-preview:free,openrouter/free"
 # ASAL_DIIZINKAN = "https://contoh-domain-lain.id"
 
 # Pembatas laju: maks. 20 pesan per menit per alamat IP (melindungi saldo API).
