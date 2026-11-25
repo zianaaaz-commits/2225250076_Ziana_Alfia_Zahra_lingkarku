@@ -28,13 +28,19 @@ Yang dilakukan server (`index.ts`):
 Yang diperlukan: akun **Cloudflare** (gratis) dan API key dari penyedia yang dipilih.
 
 1. Atur `PENYEDIA` (dan bila perlu `MODEL`) di `wrangler.toml`.
-2. Buka terminal VS Code di folder proyek, lalu:
+2. **Cara termudah (Windows):** klik dua kali `server\asisten\pasang.cmd` di File Explorer
+   (atau ketik `server\asisten\pasang.cmd` di terminal). Ikuti 3 langkahnya: login → unggah → tempel API key.
+
+   > Muncul tulisan merah *"running scripts is disabled on this system"* saat mengetik `npx` di PowerShell?
+   > Itu pengaturan keamanan Windows. Pakai `pasang.cmd`, atau ganti `npx` dengan `npx.cmd`.
+
+3. Atau manual di terminal VS Code dari folder proyek:
 
 ```bash
 cd server/asisten
-npx wrangler login              # buka browser → izinkan akses Cloudflare
-npx wrangler secret put API_KEY # tempel API key, tekan Enter (tidak terlihat di layar)
-npx wrangler deploy             # unggah server
+npx.cmd wrangler login              # buka browser → izinkan akses Cloudflare
+npx.cmd wrangler deploy             # unggah server
+npx.cmd wrangler secret put API_KEY # tempel API key, tekan Enter (tidak terlihat di layar)
 ```
 
 Perintah terakhir menampilkan alamat seperti `https://lingkarku-asisten.<nama-akun>.workers.dev`.
