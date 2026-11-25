@@ -59,6 +59,9 @@ Kak Bulat tersedia di setiap kegiatan dan menerima konteksnya otomatis:
 
 ## 6. Keamanan & privasi
 
+- Penyedia AI dapat dipilih tanpa mengubah aplikasi: **DeepSeek** (bawaan, berbayar sangat murah),
+  **OpenRouter** (model DeepSeek `:free`, gratis dengan kuota harian), atau **Gemini** (gratis, bukan DeepSeek).
+  Desain pedagogis (prompt, fase, penjaga) sama untuk semua penyedia.
 - API key hanya di server Cloudflare Worker (`server/asisten/`), tidak di aplikasi publik.
 - Hanya aplikasi LingkarKu yang boleh memakai server; 20 pesan/menit per IP; maks. 800 karakter per pesan.
 - **Nama & kelas siswa tidak dikirim.** Server tidak menyimpan percakapan.

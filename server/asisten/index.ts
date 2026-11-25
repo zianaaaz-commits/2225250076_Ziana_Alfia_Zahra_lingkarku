@@ -1,14 +1,21 @@
 // Server perantara Asisten Belajar "Kak Bulat" (Cloudflare Worker).
-// - Menyimpan API key DeepSeek sebagai secret (tidak pernah sampai ke aplikasi/HP siswa).
+// - Menyimpan API key sebagai secret (tidak pernah sampai ke aplikasi/HP siswa).
 // - Memeriksa permintaan, membatasi pemakaian, menyusun prompt pedagogis (RMT + CLT),
-//   memanggil DeepSeek, lalu menyembunyikan jawaban akhir bila sempat bocor.
+//   memanggil model AI, lalu menyembunyikan jawaban akhir bila sempat bocor.
+// Penyedia AI dapat dipilih (semua memakai format OpenAI): deepseek (berbayar murah),
+// openrouter (ada model gratis), gemini (Google AI Studio, ada kuota gratis).
 // Panduan pemasangan: server/asisten/README.md
 import { jagaJawaban, susunPesanModel, tentukanFase, validasiPermintaan } from '../../src/lib/asisten/pedagogi';
 import type { JawabanAsisten } from '../../src/lib/asisten/tipe';
 
 export interface Env {
-  DEEPSEEK_API_KEY: string;
-  /** Nama model DeepSeek (bawaan: deepseek-flash). */
+  /** API key penyedia yang dipilih (secret). */
+  API_KEY?: string;
+  /** Nama lama, tetap diterima untuk penyedia deepseek. */
+  DEEPSEEK_API_KEY?: string;
+  /** deepseek | openrouter | gemini (bawaan: deepseek). */
+  PENYEDIA?: string;
+  /** Nama model; bawaan mengikuti penyedia. */
   MODEL?: string;
   /** Daftar asal (origin) tambahan yang diizinkan, dipisah koma. */
   ASAL_DIIZINKAN?: string;
@@ -17,6 +24,34 @@ export interface Env {
 }
 
 export const URL_DEEPSEEK = 'https://api.deepseek.com/chat/completions';
+
+interface Penyedia {
+  url: string;
+  modelBawaan: string;
+  /** Parameter tambahan khusus penyedia. */
+  ekstra?: Record<string, unknown>;
+  header?: Record<string, string>;
+}
+
+export const PENYEDIA: Record<string, Penyedia> = {
+  deepseek: { url: URL_DEEPSEEK, modelBawaan: 'deepseek-flash', ekstra: { thinking: { type: 'disabled' } } },
+  openrouter: {
+    url: 'https://openrouter.ai/api/v1/chat/completions',
+    // Pilih model DeepSeek gratis yang tersedia (id berakhiran ":free") di https://openrouter.ai/models?max_price=0
+    modelBawaan: 'deepseek/deepseek-chat:free',
+    header: { 'HTTP-Referer': 'https://zianaaaz-commits.github.io', 'X-OpenRouter-Title': 'LingkarKu' },
+  },
+  gemini: {
+    url: 'https://generativelanguage.googleapis.com/v1beta/openai/chat/completions',
+    modelBawaan: 'gemini-2.5-flash-lite',
+  },
+};
+
+export function pilihPenyedia(env: Env): Penyedia & { nama: string; model: string; kunci: string } {
+  const nama = env.PENYEDIA && PENYEDIA[env.PENYEDIA] ? env.PENYEDIA : 'deepseek';
+  const p = PENYEDIA[nama];
+  return { ...p, nama, model: env.MODEL || p.modelBawaan, kunci: env.API_KEY || env.DEEPSEEK_API_KEY || '' };
+}
 
 const ASAL_BAWAAN = [
   'https://zianaaaz-commits.github.io', // GitHub Pages
@@ -70,7 +105,8 @@ export default {
     }
     if (url.pathname !== '/chat' || req.method !== 'POST') return galat('tidak-ditemukan', 'Alamat tidak dikenal.', 404, asal);
     if (!asal) return galat('asal-ditolak', 'Permintaan hanya boleh dari aplikasi LingkarKu.', 403, null);
-    if (!env.DEEPSEEK_API_KEY) return galat('belum-diatur', 'API key belum dipasang di server.', 500, asal);
+    const ai = pilihPenyedia(env);
+    if (!ai.kunci) return galat('belum-diatur', 'API key belum dipasang di server.', 500, asal);
 
     if (env.PEMBATAS) {
       const ip = req.headers.get('CF-Connecting-IP') ?? 'tanpa-ip';
@@ -90,16 +126,16 @@ export default {
 
     let respons: Response;
     try {
-      respons = await fetch(URL_DEEPSEEK, {
+      respons = await fetch(ai.url, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${env.DEEPSEEK_API_KEY}` },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ai.kunci}`, ...(ai.header ?? {}) },
         body: JSON.stringify({
-          model: env.MODEL || 'deepseek-flash',
+          model: ai.model,
           messages: susunPesanModel(p),
-          thinking: { type: 'disabled' }, // jawaban cepat & hemat; suhu berlaku
           temperature: 0.5,
           max_tokens: 400,
           stream: false,
+          ...(ai.ekstra ?? {}), // deepseek: thinking dimatikan agar cepat & hemat
         }),
       });
     } catch {

@@ -1,5 +1,5 @@
 // @vitest-environment node
-import worker, { URL_DEEPSEEK, type Env } from '../../server/asisten/index';
+import worker, { PENYEDIA, pilihPenyedia, URL_DEEPSEEK, type Env } from '../../server/asisten/index';
 import { PESAN_PENJAGA } from '../lib/asisten/pedagogi';
 
 const ASAL = 'https://zianaaaz-commits.github.io';
@@ -94,6 +94,33 @@ describe('server Asisten Belajar (Cloudflare Worker)', () => {
     const r = await kirim(badanSah, ASAL, { ...env, PEMBATAS: { limit: async () => ({ success: false }) } });
     expect(r.status).toBe(429);
     expect(f).not.toHaveBeenCalled();
+  });
+
+  it('penyedia gratis: OpenRouter (model DeepSeek :free) tanpa parameter khusus DeepSeek', async () => {
+    const f = deepseek('Apa yang ditanya?');
+    vi.stubGlobal('fetch', f);
+    const r = await kirim(badanSah, ASAL, { PENYEDIA: 'openrouter', API_KEY: 'kunci-or' });
+    expect(r.status).toBe(200);
+    const [url, opsi] = f.mock.calls[0];
+    expect(url).toBe(PENYEDIA.openrouter.url);
+    expect(opsi.headers.Authorization).toBe('Bearer kunci-or');
+    expect(opsi.headers['X-OpenRouter-Title']).toBe('LingkarKu');
+    const badan = JSON.parse(opsi.body);
+    expect(badan.model).toMatch(/deepseek.*:free$/);
+    expect(badan.thinking).toBeUndefined();
+  });
+
+  it('penyedia gratis: Gemini dengan model yang bisa diganti', async () => {
+    const f = deepseek('Apa yang ditanya?');
+    vi.stubGlobal('fetch', f);
+    await kirim(badanSah, ASAL, { PENYEDIA: 'gemini', API_KEY: 'kunci-g', MODEL: 'gemini-uji' });
+    const [url, opsi] = f.mock.calls[0];
+    expect(url).toBe(PENYEDIA.gemini.url);
+    expect(JSON.parse(opsi.body).model).toBe('gemini-uji');
+  });
+
+  it('penyedia tidak dikenal → kembali ke deepseek', () => {
+    expect(pilihPenyedia({ PENYEDIA: 'asal', API_KEY: 'k' })).toMatchObject({ nama: 'deepseek', model: 'deepseek-flash', kunci: 'k' });
   });
 
   it('tanpa API key → galat konfigurasi', async () => {
