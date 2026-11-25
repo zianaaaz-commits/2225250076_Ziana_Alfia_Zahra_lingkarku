@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import CircleSVG from '../../components/CircleSVG';
 import FotoKonteks from '../../components/FotoKonteks';
 import Perayaan from '../../components/Perayaan';
+import TombolAsisten from '../../components/TombolAsisten';
 import KotakUmpanBalik from '../../components/KotakUmpanBalik';
 import Tombol from '../../components/Tombol';
 import { useProgres } from '../../app/ProgresContext';
@@ -54,6 +55,9 @@ function Ringkasan({ cerita }: { cerita: DataCerita }) {
   );
 }
 
+/** Teks utuh soal cerita (gabungan potongan yang bisa ditandai). */
+const teksCerita = (c: DataCerita) => c.segmen.map((s) => (typeof s === 'string' ? s : s.teks)).join('');
+
 function Isi({ cerita }: { cerita: DataCerita }) {
   const { tandai } = useProgres();
   const [fase, setFase] = useState<'tandai' | 'pemandu' | 'gambar' | 'hitung' | 'selesai'>('tandai');
@@ -76,6 +80,19 @@ function Isi({ cerita }: { cerita: DataCerita }) {
 
       {fase === 'tandai' && cerita.foto && <FotoKonteks id={cerita.foto} />}
       {fase === 'tandai' && <TandaiCerita cerita={cerita} benar={() => setFase('pemandu')} />}
+      {(fase === 'tandai' || fase === 'pemandu') && (
+        <TombolAsisten
+          ambilKonteks={() => ({
+            modul: 'cerita',
+            soal: teksCerita(cerita),
+            tahapLiterasi: fase === 'tandai' ? 'pahami' : 'rumuskan',
+            pertanyaan:
+              fase === 'tandai'
+                ? 'Tandai informasi yang diketahui dan yang ditanya.'
+                : 'Yang ditanya panjang atau luas?',
+          })}
+        />
+      )}
 
       {fase !== 'tandai' && fase !== 'hitung' && fase !== 'selesai' && (
         <>
@@ -117,7 +134,14 @@ function Isi({ cerita }: { cerita: DataCerita }) {
         </>
       )}
 
-      {fase === 'hitung' && <KartuSoal soal={cerita.soal} selesai={() => setFase('selesai')} />}
+      {fase === 'hitung' && (
+        <KartuSoal
+          soal={cerita.soal}
+          modulAsisten="cerita"
+          soalUntukAsisten={teksCerita(cerita)}
+          selesai={() => setFase('selesai')}
+        />
+      )}
 
       {fase === 'selesai' && (
         <div className="flex flex-col items-center gap-4 py-6 text-center">

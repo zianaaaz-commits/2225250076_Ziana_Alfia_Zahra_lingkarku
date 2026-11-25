@@ -118,6 +118,11 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
     - Foto konteks (`content/gambar.ts`, `FotoKonteks`) hanya untuk soal yang konteksnya **sama** dengan fotonya (mis. pizza), ditampilkan kecil, dan **tidak menggantikan** diagram berlabel.
     - Tanpa animasi latar atau iklan.
 11. **Literasi matematika**: masalah kontekstual mengikuti 5 tahap Pahami → Rumuskan → Hitung → Tafsirkan → Jelaskan (lihat [docs/09-literasi-matematika.md](docs/09-literasi-matematika.md)).
+12. **Asisten Belajar AI "Kak Bulat"** adalah *mediator* Rigorous Mathematical Thinking, bukan pemberi jawaban
+    ([docs/10-asisten-belajar-rmt.md](docs/10-asisten-belajar-rmt.md)). Aturan pedagogis ada di
+    `src/lib/asisten/pedagogi.ts` (fase RMT, 4 tingkat bantuan, prompt, penjaga jawaban). Jangan pernah mengirim
+    kunci jawaban ke model AI; jangan menaruh API key di kode aplikasi (hanya di Cloudflare Worker `server/asisten/`).
+    Panel asisten hanya terbuka atas permintaan siswa; maskot boleh tampil di panel itu.
 
 ## 6. Aturan Konten Matematika
 
@@ -142,6 +147,9 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
   **hanya disimpan di perangkat** (`localStorage`) dan tidak pernah dikirim otomatis ke server mana pun.
   Guru menerimanya hanya bila siswa sendiri membagikan **Kartu Hasil** (`/hasil`). Tidak ada login,
   tidak ada analitik pihak ketiga. Jangan menambah pengiriman data tanpa persetujuan pemilik proyek.
+- Pengecualian yang disetujui pemilik proyek (25 Nov 2026): **Asisten Belajar** mengirim isi percakapan, teks soal,
+  jawaban/status, dan diagnosis kesalahan ke DeepSeek melalui server sendiri — **tanpa nama/kelas** — hanya saat
+  siswa membuka panel asisten dan sedang online.
 - Komentar kode boleh Bahasa Indonesia atau Inggris, konsisten per file.
 
 ## 8. Yang JANGAN Dilakukan
@@ -150,6 +158,7 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
 - Jangan menampilkan seluruh langkah pembahasan sekaligus.
 - Jangan menambah library besar (mis. Three.js, Chart.js) untuk simulasi — cukup SVG.
 - Jangan membuat fitur yang butuh internet setelah aplikasi terpasang (harus jalan offline).
+  Satu-satunya pengecualian: Asisten Belajar (opsional; aplikasi tetap lengkap tanpa internet).
 
 ## 9. Dokumen Terkait
 
@@ -164,3 +173,5 @@ Setiap fitur/halaman HARUS memenuhi aturan ini. Kode di kurung adalah bukti wawa
 | [docs/07-roadmap.md](docs/07-roadmap.md) | Tahapan & daftar tugas |
 | [docs/08-rencana-evaluasi.md](docs/08-rencana-evaluasi.md) | Validasi ahli, uji coba, instrumen beban kognitif |
 | [docs/09-literasi-matematika.md](docs/09-literasi-matematika.md) | Kerangka & fitur literasi matematika (PISA/AKM) |
+| [docs/10-asisten-belajar-rmt.md](docs/10-asisten-belajar-rmt.md) | Asisten AI: RMT, bantuan bertingkat, beban kognitif |
+| [server/asisten/README.md](server/asisten/README.md) | Pemasangan server Asisten (Cloudflare Worker + DeepSeek) |

@@ -5,6 +5,7 @@ import CircleSVG from '../../components/CircleSVG';
 import FotoKonteks from '../../components/FotoKonteks';
 import MathText from '../../components/MathText';
 import Perayaan from '../../components/Perayaan';
+import TombolAsisten from '../../components/TombolAsisten';
 import { FASE, LITERASI, type Misi } from '../../content/literasi';
 import LangkahMisi from './LangkahMisi';
 import WiperSVG from './WiperSVG';
@@ -122,6 +123,17 @@ function Isi({ misi }: { misi: Misi }) {
           <p className="text-sm text-gray-600">
             Langkah {no + 1} dari {misi.langkah.length}
           </p>
+          <TombolAsisten
+            key={`asisten-${no}`}
+            kunci={langkah.jenis === 'isian' ? langkah.kunci : undefined}
+            ambilKonteks={() => ({
+              modul: 'literasi',
+              soal: `${misi.cerita.replace(/\*\*/g, '')} Data: ${misi.info.map((x) => `${x.label} ${x.nilai}`).join('; ')}.`,
+              pertanyaan: langkah.tanya,
+              tahapLiterasi: langkah.fase,
+              ...(langkah.jenis === 'isian' ? { satuan: langkah.satuan } : {}),
+            })}
+          />
           <LangkahMisi
             key={no}
             l={langkah}

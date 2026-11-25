@@ -62,6 +62,11 @@ Durasi di bawah adalah perkiraan; sesuaikan dengan jadwal kuliah.
 - [x] GitHub Actions: uji + GitHub Pages (`web.yml`), APK ke Releases (`apk.yml`)
 - [x] Data diri wajib di layar awal (nama & kelas, hanya di perangkat) + **Kartu Hasil** untuk dibagikan ke guru
 - [x] Tema petualangan (peta pos + harta karun), maskot Si Bulat, foto konteks pizza, halaman Kredit
+- [x] Ilustrasi 8 konteks (SVG), gelar petualang, lencana, peti harta karun
+- [x] **Asisten Belajar "Kak Bulat"** (DeepSeek via Cloudflare Worker): mediator RMT 3 fase, 4 tingkat bantuan,
+      prompt berbasis CLT & literasi, penjaga jawaban akhir — [10-asisten-belajar-rmt.md](10-asisten-belajar-rmt.md)
+- [ ] Pasang server asisten (akun Cloudflare + API key DeepSeek) & isi `.env.production`
+- [ ] Sesuaikan fase RMT dengan ringkasan dosen (bila berbeda dari Kinard & Kozulin)
 - [ ] Lengkapi sumber/lisensi gambar stok di halaman Kredit
 - [ ] Simpan kunci APK ke GitHub Secrets (oleh pemilik repo)
 - [ ] Uji APK di HP Android nyata

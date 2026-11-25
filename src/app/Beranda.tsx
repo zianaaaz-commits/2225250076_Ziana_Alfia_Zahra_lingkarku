@@ -185,6 +185,13 @@ export default function Beranda() {
         </span>
       </Link>
 
+      <Link
+        to="/asisten"
+        className="mt-3 flex min-h-12 items-center justify-center gap-2 rounded-xl border-2 border-orange-300 bg-orange-50 font-semibold text-orange-900"
+      >
+        💬 Tanya Kak Bulat (Asisten Belajar)
+      </Link>
+
       {!sudahTerpasang() && (
         <Link
           to="/pasang"

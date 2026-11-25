@@ -36,6 +36,9 @@ Hasil wawancara dengan siswa kelas IX menunjukkan bahwa siswa:
 5. **Latihan**: 3 level, umpan balik sesuai jenis kesalahan, petunjuk, pembahasan, soal acak.
 6. **Soal Cerita**: tandai *Diketahui/Ditanya*, abaikan informasi pengecoh.
 7. **Misi Literasi**: 4 masalah kontekstual: Pahami → Rumuskan → Hitung → Tafsirkan → Jelaskan.
+8. **Asisten Belajar "Kak Bulat"** (AI DeepSeek): membimbing proses berpikir dengan model
+   *Rigorous Mathematical Thinking* (3 fase) dan 4 tingkat bantuan, **tanpa memberi jawaban akhir**
+   ([desain pedagogis](docs/10-asisten-belajar-rmt.md) · [pemasangan server](server/asisten/README.md)).
 
 Semua modul disajikan sebagai **Petualangan Negeri Lingkaran**: peta 7 pos yang dipandu maskot
 **Si Bulat** menuju harta karun (Kartu Hasil). Plus: data diri siswa, Kartu Rumus, progres tersimpan,

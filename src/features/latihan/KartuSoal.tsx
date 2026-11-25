@@ -1,4 +1,6 @@
-import { useId, useMemo, useState } from 'react';
+import { useCallback, useId, useMemo, useState } from 'react';
+import TombolAsisten from '../../components/TombolAsisten';
+import type { KonteksSoal } from '../../lib/asisten/tipe';
 import FotoKonteks from '../../components/FotoKonteks';
 import KepalaSoal from '../../components/KepalaSoal';
 import KotakUmpanBalik from '../../components/KotakUmpanBalik';
@@ -16,12 +18,16 @@ interface Props {
   soal: Soal;
   /** Dipanggil saat siswa lanjut; `benar` = dijawab benar tanpa membuka pembahasan. */
   selesai: (benar: boolean) => void;
+  /** Jenis kegiatan untuk Asisten Belajar. */
+  modulAsisten?: 'latihan' | 'cerita';
+  /** Teks soal lengkap untuk Asisten (mis. cerita utuh); bawaan: teks soal. */
+  soalUntukAsisten?: string;
 }
 
 const PI_CATATAN = { '22/7': 'Gunakan π = 22/7', '3.14': 'Gunakan π = 3,14' } as const;
 
 // Satu soal latihan: jawab → umpan balik spesifik → petunjuk bertingkat → pembahasan (DS02, IL05, GL02).
-export default function KartuSoal({ soal, selesai }: Props) {
+export default function KartuSoal({ soal, selesai, modulAsisten = 'latihan', soalUntukAsisten }: Props) {
   const id = useId();
   const bantuan = useMemo(() => buatBantuan(soal), [soal]);
   const contoh = CONTOH.find((c) => c.id === soal.contohTerkait);
@@ -36,6 +42,19 @@ export default function KartuSoal({ soal, selesai }: Props) {
 
   const benar = hasil?.benar === true;
   const bisaJawab = !benar && !lihatPembahasan;
+
+  // Konteks untuk Kak Bulat: soal, jawaban & status terbaru (tanpa data pribadi).
+  const ambilKonteks = useCallback(
+    (): KonteksSoal => ({
+      modul: modulAsisten,
+      soal: `${soalUntukAsisten ?? soal.teks}${soal.ditanya === 'perbandingan' ? '' : ` (${PI_CATATAN[soal.data.pi]})`}`,
+      satuan: soal.satuan,
+      ...(teks.trim() ? { jawabanSiswa: teks.trim() } : {}),
+      status: hasil ? (hasil.benar ? 'benar' : 'salah') : 'belum',
+      ...(hasil && !hasil.benar && hasil.kode ? { kesalahan: hasil.pesan.replace(/\*\*/g, '') } : {}),
+    }),
+    [modulAsisten, soal, soalUntukAsisten, teks, hasil],
+  );
 
   const periksa = () => {
     const n = parseJawaban(teks);
@@ -110,6 +129,14 @@ export default function KartuSoal({ soal, selesai }: Props) {
             </Tombol>
           )}
         </div>
+      )}
+
+      {!lihatPembahasan && (
+        <TombolAsisten
+          ambilKonteks={ambilKonteks}
+          kunci={soal.kunci}
+          teks={benar ? '💬 Diskusikan dengan Kak Bulat' : '💬 Tanya Kak Bulat'}
+        />
       )}
 
       {!lihatPembahasan && petunjuk >= 1 && (

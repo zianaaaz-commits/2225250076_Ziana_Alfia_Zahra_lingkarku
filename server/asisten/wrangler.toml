@@ -1,0 +1,15 @@
+# Konfigurasi Cloudflare Worker untuk Asisten Belajar "Kak Bulat".
+# API key TIDAK ditulis di sini — pasang dengan: npx wrangler secret put DEEPSEEK_API_KEY
+name = "lingkarku-asisten"
+main = "index.ts"
+compatibility_date = "2025-09-01"
+
+[vars]
+MODEL = "deepseek-flash"
+# ASAL_DIIZINKAN = "https://contoh-domain-lain.id"
+
+# Pembatas laju: maks. 20 pesan per menit per alamat IP (melindungi saldo API).
+[[ratelimits]]
+name = "PEMBATAS"
+namespace_id = "1001"
+simple = { limit = 20, period = 60 }

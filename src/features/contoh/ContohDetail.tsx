@@ -4,6 +4,7 @@ import { useProgres } from '../../app/ProgresContext';
 import FotoKonteks from '../../components/FotoKonteks';
 import IsianAngka from '../../components/IsianAngka';
 import Perayaan from '../../components/Perayaan';
+import TombolAsisten from '../../components/TombolAsisten';
 import KepalaSoal from '../../components/KepalaSoal';
 import MathText from '../../components/MathText';
 import StepReveal from '../../components/StepReveal';
@@ -44,6 +45,17 @@ function SoalMelengkapi({ id, m, berikutnya }: { id: string; m: Melengkapi; beri
           </li>
         ))}
       </ol>
+      {!selesai && (
+        <TombolAsisten
+          kunci={m.jawaban.nilai}
+          ambilKonteks={() => ({
+            modul: 'melengkapi',
+            soal: m.soal,
+            pertanyaan: 'Lengkapi kotak yang kosong pada langkah penyelesaian.',
+            tahapLiterasi: 'hitung',
+          })}
+        />
+      )}
       {selesai && (
         <div role="status" className="flex flex-col gap-3 rounded-xl border-l-4 border-benar bg-gray-50 p-4">
           <Perayaan judul="Hebat, semua kotak benar!" />

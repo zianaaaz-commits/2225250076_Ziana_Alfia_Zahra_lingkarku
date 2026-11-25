@@ -17,6 +17,12 @@ __pycache__/
 *.pyc
 python/data/konten.json
 
+# Rahasia lokal (API key dsb.) — JANGAN PERNAH di-commit
+.env.local
+.env.*.local
+.dev.vars
+.wrangler/
+
 # Kunci tanda tangan APK — JANGAN PERNAH di-commit
 *.p12
 *.jks
