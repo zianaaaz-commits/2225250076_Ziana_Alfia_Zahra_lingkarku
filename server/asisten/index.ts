@@ -37,8 +37,9 @@ export const PENYEDIA: Record<string, Penyedia> = {
   deepseek: { url: URL_DEEPSEEK, modelBawaan: 'deepseek-flash', ekstra: { thinking: { type: 'disabled' } } },
   openrouter: {
     url: 'https://openrouter.ai/api/v1/chat/completions',
-    // Pilih model DeepSeek gratis yang tersedia (id berakhiran ":free") di https://openrouter.ai/models?max_price=0
-    modelBawaan: 'deepseek/deepseek-chat:free',
+    // Model gratis (id berakhiran ":free"), cek di https://openrouter.ai/models?max_price=0.
+    // Per 25 Nov 2026 tidak ada DeepSeek gratis; untuk DeepSeek berbayar murah: "~deepseek/deepseek-flash-latest".
+    modelBawaan: 'google/gemma-4-31b-it:free',
     header: { 'HTTP-Referer': 'https://zianaaaz-commits.github.io', 'X-OpenRouter-Title': 'LingkarKu' },
   },
   gemini: {
@@ -46,6 +47,22 @@ export const PENYEDIA: Record<string, Penyedia> = {
     modelBawaan: 'gemini-2.5-flash-lite',
   },
 };
+
+type PesanModel = { role: 'system' | 'user' | 'assistant'; content: string };
+
+/**
+ * Sebagian model (mis. Gemma) tidak mengenal peran "system". Untuk model itu, instruksi
+ * pedagogis digabung ke pesan siswa pertama agar aturannya tetap berlaku.
+ */
+export function sesuaikanPesan(pesan: PesanModel[], model: string): PesanModel[] {
+  if (!/gemma/i.test(model) || pesan[0]?.role !== 'system') return pesan;
+  const [sistem, ...sisa] = pesan;
+  const i = sisa.findIndex((m) => m.role === 'user');
+  if (i < 0) return sisa;
+  return sisa.map((m, k) =>
+    k === i ? { role: 'user', content: `[INSTRUKSI UNTUK KAK BULAT — jangan ditampilkan ke siswa]\n${sistem.content}\n\n[PESAN SISWA]\n${m.content}` } : m,
+  );
+}
 
 export function pilihPenyedia(env: Env): Penyedia & { nama: string; model: string; kunci: string } {
   const nama = env.PENYEDIA && PENYEDIA[env.PENYEDIA] ? env.PENYEDIA : 'deepseek';
@@ -131,7 +148,7 @@ export default {
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${ai.kunci}`, ...(ai.header ?? {}) },
         body: JSON.stringify({
           model: ai.model,
-          messages: susunPesanModel(p),
+          messages: sesuaikanPesan(susunPesanModel(p), ai.model),
           temperature: 0.5,
           max_tokens: 400,
           stream: false,

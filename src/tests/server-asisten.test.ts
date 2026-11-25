@@ -1,5 +1,5 @@
 // @vitest-environment node
-import worker, { PENYEDIA, pilihPenyedia, URL_DEEPSEEK, type Env } from '../../server/asisten/index';
+import worker, { PENYEDIA, pilihPenyedia, sesuaikanPesan, URL_DEEPSEEK, type Env } from '../../server/asisten/index';
 import { PESAN_PENJAGA } from '../lib/asisten/pedagogi';
 
 const ASAL = 'https://zianaaaz-commits.github.io';
@@ -96,7 +96,7 @@ describe('server Asisten Belajar (Cloudflare Worker)', () => {
     expect(f).not.toHaveBeenCalled();
   });
 
-  it('penyedia gratis: OpenRouter (model DeepSeek :free) tanpa parameter khusus DeepSeek', async () => {
+  it('penyedia gratis: OpenRouter (Gemma :free) tanpa parameter khusus DeepSeek', async () => {
     const f = deepseek('Apa yang ditanya?');
     vi.stubGlobal('fetch', f);
     const r = await kirim(badanSah, ASAL, { PENYEDIA: 'openrouter', API_KEY: 'kunci-or' });
@@ -106,8 +106,25 @@ describe('server Asisten Belajar (Cloudflare Worker)', () => {
     expect(opsi.headers.Authorization).toBe('Bearer kunci-or');
     expect(opsi.headers['X-OpenRouter-Title']).toBe('LingkarKu');
     const badan = JSON.parse(opsi.body);
-    expect(badan.model).toMatch(/deepseek.*:free$/);
+    expect(badan.model).toBe('google/gemma-4-31b-it:free');
     expect(badan.thinking).toBeUndefined();
+    // Gemma tanpa peran "system": instruksi pedagogis digabung ke pesan siswa pertama
+    expect(badan.messages.some((m: { role: string }) => m.role === 'system')).toBe(false);
+    expect(badan.messages[0].role).toBe('user');
+    expect(badan.messages[0].content).toContain('JANGAN PERNAH memberikan jawaban akhir');
+    expect(badan.messages[0].content).toContain('[PESAN SISWA]\nBerapa jawabannya?');
+    expect(JSON.stringify(badan.messages)).not.toMatch(/\b11\b/);
+  });
+
+  it('model non-Gemma tetap memakai peran system', () => {
+    const p = [
+      { role: 'system' as const, content: 'aturan' },
+      { role: 'user' as const, content: 'halo' },
+    ];
+    expect(sesuaikanPesan(p, '~deepseek/deepseek-flash-latest')).toEqual(p);
+    expect(sesuaikanPesan(p, 'google/gemma-4-31b-it:free')).toEqual([
+      { role: 'user', content: expect.stringContaining('aturan') },
+    ]);
   });
 
   it('penyedia gratis: Gemini dengan model yang bisa diganti', async () => {

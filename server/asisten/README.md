@@ -10,6 +10,11 @@ Yang dilakukan server (`index.ts`):
 4. Memanggil DeepSeek (`deepseek-flash`, mode *thinking* dimatikan, maks. 400 token).
 5. Menyembunyikan jawaban akhir bila model sempat menuliskannya.
 
+> **Pengaturan saat ini:** `PENYEDIA = "openrouter"`, `MODEL = "google/gemma-4-31b-it:free"` (gratis,
+> 50 pesan/hari). Per 25 Nov 2026 tidak ada model DeepSeek gratis di OpenRouter; model DeepSeek termurah di
+> sana adalah `~deepseek/deepseek-flash-latest` (berbayar). Gemma tidak mengenal pesan "system", jadi server
+> otomatis menggabungkan instruksi pedagogis ke pesan pertama (`sesuaikanPesan`).
+
 ## Pilih penyedia AI
 
 | `PENYEDIA` di `wrangler.toml` | Biaya | Ambil API key di | Catatan |
