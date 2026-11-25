@@ -36,10 +36,15 @@ jobs:
       - name: Siapkan kunci tanda tangan
         env:
           KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
         run: |
           if [ -n "$KEYSTORE_BASE64" ]; then
-            echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/rilis.p12"
+            # Buang spasi/akhir baris (CR/LF) yang mungkin ikut tersimpan dari Windows.
+            printf '%s' "$KEYSTORE_BASE64" | tr -d ' \r\n' | base64 -d > "$RUNNER_TEMP/rilis.p12"
             echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/rilis.p12" >> "$GITHUB_ENV"
+            # Periksa kunci dapat dibuka dengan kata sandi (gagal cepat bila secret keliru).
+            keytool -list -storetype pkcs12 -keystore "$RUNNER_TEMP/rilis.p12" \
+              -storepass "$(printf '%s' "$KEYSTORE_PASSWORD" | tr -d '\r\n')" > /dev/null
           else
             echo "::warning::Secret ANDROID_KEYSTORE_BASE64 belum diatur; APK tidak ditandatangani dengan kunci rilis."
           fi
